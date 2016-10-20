@@ -1,2 +1,6 @@
 Esta es una prueba 
+<<<<<<< HEAD
 Solomon 
+=======
+Juegos
+>>>>>>> origin/Prueba
