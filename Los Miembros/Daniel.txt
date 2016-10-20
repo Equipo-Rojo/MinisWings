@@ -1,3 +1,5 @@
 Nombre: Francisco Daniel Cornejo Mora
 Rol: Lider, Programaor, Diseñador
 Edad: 22
+Ciudad: Morelia
+Fecha de Nacimiento: 11/04/1994
