@@ -1,0 +1,3 @@
+Nombre: Francisco Daniel Cornejo Mora
+Rol: Lider, Programaor, Diseñador
+Edad: 22
