@@ -1,0 +1,89 @@
+
+body{
+  margin: 0px;
+  padding: 0px;
+  background: #191818;
+}
+
+h1{
+  color: #fff;
+  text-align: center;
+  font-family: Arial;
+  font-weight: normal;
+  margin: 2em auto 0px;
+}
+
+.form{
+  width: 400px;
+  height: 230px;
+  background: #edeff1;
+  margin: 0px auto;
+  padding-top: 20px;
+
+}
+
+input[type="text"],input[type="password"]{
+  display: block;
+  width: 309px;
+  height: 35px;
+  margin: 15px auto;
+  background: #fff;
+  border: 0px;
+  padding: 5px;
+  font-size: 16px;
+   border: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,input[type="password"]:focus{
+  border: 2px solid #FFBE00
+}
+
+input[type="submit"]{
+  display: block;
+  background: #FFBE00;
+  width: 314px;
+  padding: 12px;
+  cursor: pointer;
+  color: #fff;
+  border: 0px;
+  margin: auto;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover{
+  background: #DF7514
+}
+
+a{
+  text-align: center;
+  font-family: Arial;
+  color: gray;
+  display: block;
+  margin: 15px auto;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 12px;
+}
+
+a:hover{
+  color: #FFBE00;
+}
+
+
+::-webkit-input-placeholder {
+   color: gray;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: gray;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: gray;  
+}
+
+:-ms-input-placeholder {  
+   color: gray;  
+}

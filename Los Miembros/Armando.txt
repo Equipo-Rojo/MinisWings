@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-Mdificación de prueba by Eli
-=======
-Modificando prueba 3 by Eliuth
->>>>>>> origin/master
