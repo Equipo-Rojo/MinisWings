@@ -27,7 +27,7 @@ class inventario
         }    
     } 
     
- //--------------- Verificar y crear sesión de Administrador
+    //--------------- Listar inventario activo
     public function listarInventario()
     {
         $this->conectar();
@@ -41,11 +41,34 @@ class inventario
                         <td class="highlight">'.$row['descripcion'].'</td>
                         <td class="highlight">'.$row['existencia'].'</td>
                         <td class="highlight">'.$row['minimo'].'</td>
-                        <td class="highlight"></td>
+                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-pencil-square-o edite-inventario" aria-hidden="true"></i></td>
+                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-trash delete-inventario" aria-hidden="true"></i></td> 
                         </tr>';
                 }
             }
             echo $producto;
             $this->con->close();
+    }
+    //--------------- Eliminar producto del inventario
+    public function eliminarProducto($id)
+    {   
+        $this->conectar();
+        $sql = "UPDATE inventario SET status='inactivo' WHERE id='".$id."'";
+        $result = $this->con->query($sql);
+        if($this->con->affected_rows){
+            echo "Exito";
+        }        
+        $this->con->close();
+    }
+    //--------------- Eliminar producto del inventario
+    public function agregarProducto($id)
+    {   
+        $this->conectar();
+        $sql = "UPDATE inventario SET status='inactivo' WHERE id='".$id."'";
+        $result = $this->con->query($sql);
+        if($this->con->affected_rows){
+            echo "Exito";
+        }        
+        $this->con->close();
     }
 }

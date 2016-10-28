@@ -1,5 +1,6 @@
 <h1>Empleados</h1>
-<button>Agregar</button>
+<button class="button-xlarge button-warning pure-button"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+<br/><br/>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">
         <thead>

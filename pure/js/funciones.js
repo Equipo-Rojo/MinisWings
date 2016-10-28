@@ -1,7 +1,8 @@
 $(document).ready(function(){
-    //-- Este metodo embebe los menus de cada categoria -- //
-    $('a.pure-menu-link').click(function(event){
-        event.preventDefault();
+    alert("cargar");
+    $('button.delete-inventario').click(function(event){
+        alert("eliminar");
+        /*event.preventDefault();
         $id=$(this).attr('href');
         $.ajax({ 
             type: "POST", 
@@ -11,7 +12,6 @@ $(document).ready(function(){
                 $("div#main").append(data);
             }  
         });  
-    });
-    //-- Fin -- //
-   
+        */
+    });   
 });

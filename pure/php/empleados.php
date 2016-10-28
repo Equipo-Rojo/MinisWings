@@ -40,8 +40,8 @@ class empleado
                         <td class="highlight">'.$row['nombre'].'</td>
                         <td class="highlight">'.$row['apellidoP'].' '.$row['apellidoM'].'</td>
                         <td class="highlight">'.$row['roll'].'</td>
-                        <td class="highlight"></td>
-                        <td class="highlight"></td>
+                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-trash" aria-hidden="true"></i></td>
                         </tr>';
                 }
             }

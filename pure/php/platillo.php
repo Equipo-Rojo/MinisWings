@@ -42,8 +42,7 @@ class platillo
                         <td class="highlight">'.$row['categoria'].'</td>
                         <td class="highlight">'.$row['precio'].'</td>   
                         <td class="highlight">'.$row['precioDescuento'].'</td>
-                        
-                        <td class="highlight"></td>
+                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
                         </tr>';
                 }
             }
