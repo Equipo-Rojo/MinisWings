@@ -38,7 +38,7 @@ class Login
                 $result = $result->fetch_assoc();
                 echo "<script>alert('Exito! Bienvenido  ');</script>";
                 session_start();
-                $_SESSION['user']=$result['Nombre'];
+                $_SESSION['user']=$result['nickname'];
                 $_SESSION['type']=$result['Rol'];
                 switch ($result['Rol']) {
                     case 'Administrador':

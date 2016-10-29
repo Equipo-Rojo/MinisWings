@@ -106,7 +106,7 @@ class inventario
     {
         $this->conectar();
         $producto="";
-        $sql = "SELECT * FROM inventario WHERE status='activo' AND minimo>=cantidad";
+        $sql = "SELECT * FROM inventario WHERE status='activo' AND (minimo+20)>=cantidad";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -126,7 +126,7 @@ class inventario
     {
         $this->conectar();
         $producto="";
-        $sql = "SELECT count(*) as cant FROM inventario WHERE status='activo' AND minimo>=cantidad";
+        $sql = "SELECT count(*) as cant FROM inventario WHERE status='activo' AND (minimo+20)>=cantidad";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
            $producto= $result->fetch_assoc();
