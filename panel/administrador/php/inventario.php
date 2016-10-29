@@ -37,12 +37,12 @@ class inventario
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                         $producto .= '<tr>
-                        <td class="highlight">'.$row['producto'].'</td>
+                        <td class="highlight">'.$row['nombre'].'</td>
                         <td class="highlight">'.$row['descripcion'].'</td>
-                        <td class="highlight">'.$row['existencia'].'</td>
+                        <td class="highlight">'.$row['cantidad'].'</td>
                         <td class="highlight">'.$row['minimo'].'</td>
-                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-pencil-square-o edite-inventario" aria-hidden="true"></i></td>
-                        <td class="highlight"><i id="'.$row['id'].'" class="fa fa-trash delete-inventario" aria-hidden="true"></i></td> 
+                        <td class="highlight"><i id="'.$row['id_Inv'].'" class="fa fa-pencil-square-o edite-inventario" aria-hidden="true"></i></td>
+                        <td class="highlight"><i id="'.$row['id_Inv'].'" class="fa fa-trash delete-inventario" aria-hidden="true"></i></td> 
                         </tr>';
                 }
             }
@@ -53,22 +53,54 @@ class inventario
     public function eliminarProducto($id)
     {   
         $this->conectar();
-        $sql = "UPDATE inventario SET status='inactivo' WHERE id='".$id."'";
+        $sql = "UPDATE inventario SET status='inactivo' WHERE id_Inv='".$id."'";
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
             echo "Exito";
         }        
         $this->con->close();
     }
-    //--------------- Eliminar producto del inventario
-    public function agregarProducto($id)
+    //--------------- Editar producto del inventario
+    public function editarInventario($datos,$id)
     {   
+        $sql = $sql = "UPDATE inventario SET";
+
+        foreach($datos as $dato)
+        {
+            $sql.=$dato.',';
+        }
+        $sql=substr($sql, 0, -1);
+        $sql.="WHERE id_Inv=".$id;
         $this->conectar();
-        $sql = "UPDATE inventario SET status='inactivo' WHERE id='".$id."'";
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
-            echo "Exito";
-        }        
+            echo 'modulos/menu/inventario.php';
+        }      
+        $this->con->close();
+    }
+    //--------------- Agregar producto al inventario
+    public function agregarInventario($datos, $campos)
+    {   
+        $sql = $sql = "INSERT INTO inventario (";
+
+        foreach($campos as $campo)
+        {
+            $sql.=$campo.',';
+        }
+        $sql=substr($sql, 0, -1);
+        $sql.=') VALUES(';
+        foreach($datos as $dato)
+        {
+            $sql.=$dato.',';
+        }
+        $sql=substr($sql, 0, -1);
+        $sql.=');';
+
+        $this->conectar();
+        $result = $this->con->query($sql);
+        if($this->con->affected_rows){
+            echo 'modulos/menu/inventario.php';
+        }      
         $this->con->close();
     }
 }

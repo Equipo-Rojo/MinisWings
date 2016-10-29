@@ -1,6 +1,6 @@
 <h1>Inventario</h1>
 <button class="button-xlarge button-warning pure-button add-inventario"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
-<button class="button-xlarge button-warning pure-button"><i class="fa fa-eye" aria-hidden="true"></i> Ver Bitacorá</button>
+
 <br/><br/>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">
@@ -26,7 +26,9 @@
 <script type="text/javascript">
     //---------- Boton de eliminar producto del inventario
     $('.delete-inventario').click(function(event){
+
         var id=$(this).attr('id');
+        alert("Eliminado");
         $.ajax({ 
             data : {id:id},
             type: "POST", 

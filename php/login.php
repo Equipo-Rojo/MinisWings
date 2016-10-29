@@ -32,15 +32,15 @@ class Login
     {
         $pass=sha1($pass);
         $this->conectar();
-        $sql = "SELECT * FROM empleados WHERE nick='".$nick."' AND pass='".$pass."'";
+        $sql = "SELECT * FROM empleado WHERE nickname='".$nick."' AND Contraseña='".$pass."'";
         $result = $this->con->query($sql);
             if ($result->num_rows > 0) {
                 $result = $result->fetch_assoc();
                 echo "<script>alert('Exito! Bienvenido  ');</script>";
                 session_start();
-                $_SESSION['user']=$result['nombre'];
-                $_SESSION['type']=$result['roll'];
-                switch ($result['roll']) {
+                $_SESSION['user']=$result['Nombre'];
+                $_SESSION['type']=$result['Rol'];
+                switch ($result['Rol']) {
                     case 'Administrador':
                         header('Location: panel/administrador/');                
                         break;
