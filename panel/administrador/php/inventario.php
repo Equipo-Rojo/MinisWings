@@ -16,7 +16,6 @@ class inventario
 		$this->pw = $pw;
 		$this->db = $db;	
 	}    
-    
     //--------------- función para conectar
     public function conectar()
     {
@@ -26,7 +25,6 @@ class inventario
             die("Error en conexión: " . mysqli_connect_error());
         }    
     } 
-    
     //--------------- Listar inventario activo
     public function listarInventario()
     {
@@ -101,6 +99,39 @@ class inventario
         if($this->con->affected_rows){
             echo 'modulos/menu/inventario.php';
         }      
+        $this->con->close();
+    }
+    //--------------- Listar inventario bajo
+    public function listarAlerta()
+    {
+        $this->conectar();
+        $producto="";
+        $sql = "SELECT * FROM inventario WHERE status='activo' AND minimo>=cantidad";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                    $producto .= '<tr>
+                    <td class="highlight">'.$row['nombre'].'</td>
+                    <td class="highlight">'.$row['descripcion'].'</td>
+                    <td class="highlight">'.$row['cantidad'].'</td>
+                    <td class="highlight">'.$row['minimo'].'</td>
+                    </tr>';
+            }
+        }
+        echo $producto;
+        $this->con->close();
+    }
+    //--------------- contar bajo inventario
+    public function  contarAlerta()
+    {
+        $this->conectar();
+        $producto="";
+        $sql = "SELECT count(*) as cant FROM inventario WHERE status='activo' AND minimo>=cantidad";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
+           $producto= $result->fetch_assoc();
+        }
+        echo $producto['cant'];
         $this->con->close();
     }
 }

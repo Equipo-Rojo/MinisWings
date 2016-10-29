@@ -13,12 +13,21 @@ $(document).ready(function(){
                 type: "POST", 
                 url: 'modulos/menu/'+$id+'.php',  
                 success: function(data) {              
-                        $("div#main").empty();
-                        $("div#main").append(data);
+                    $("div#main").empty();
+                    $("div#main").append(data);
                 }  
-            });  
+            });
+            
         }
     });
-    //-- Fin -- //
-   
+    $('div#main').click(function(event){
+        $.ajax({ 
+                type: "POST", 
+                url: 'modulos/menu/contAlert.php',  
+                success: function(data) {              
+                    $("a#alert.pure-menu-link").empty();
+                    $("a#alert.pure-menu-link").append(data);
+                }  
+            });  
+    });
 });
