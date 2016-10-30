@@ -29,7 +29,7 @@
             if($(this).val()==""){valido=0;}
         });
         if(valido==0){
-            alert("Faltan campos");
+             alertify.alert("Faltan campos");
         }
         else{
             var pass=$('#pass').val();
@@ -39,12 +39,12 @@
                 type: "POST", 
                 url: 'php/usuario/changePass.php',  
                 success: function(data) {
-                    alert(data);
+                     alertify.alert(data);
                     var result=data;
                     if(result=="Exito"){
                          $.ajax({ 
                             type: "POST", 
-                            url: 'modulos/menu/alert.php',  
+                            url: 'modulos/menu/ alertify.alert.php',  
                             success: function(data) {
                                 $("div#main").empty();
                                 $("div#main").append(data);
@@ -60,7 +60,7 @@
         event.preventDefault();
         $.ajax({ 
             type: "POST", 
-            url: 'modulos/menu/alert.php',  
+            url: 'modulos/menu/ alertify.alert.php',  
             success: function(data) {
                 $("div#main").empty();
                 $("div#main").append(data);

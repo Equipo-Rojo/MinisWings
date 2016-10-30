@@ -75,7 +75,7 @@
             });  
         }
         else{
-            alert("Faltan campos");
+              alertify.alert("Faltan campos");
         }
     }); 
     //---------- Boton de cancelar edicion de producto del inventario
@@ -83,7 +83,7 @@
         event.preventDefault();
         $.ajax({ 
             type: "POST", 
-            url: 'modulos/menu/alert.php',  
+            url: 'modulos/menu/home.php',  
             success: function(data) {
                 $("div#main").empty();
                 $("div#main").append(data);

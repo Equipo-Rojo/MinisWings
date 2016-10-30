@@ -6,7 +6,7 @@ class Conexion
     private $host="";
     private $user="";
     private $pw="";
-    private $db="";
+    private $db="miniisbd";
     private $con;
     
 	public function __construct($datosServer) {
