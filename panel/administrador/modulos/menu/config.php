@@ -21,7 +21,7 @@
     </fieldset>
 </form>
 <script type="text/javascript">
-    //---------- Boton de eliminar producto del inventario
+    //---------- Boton de cambiar contraseña
     $('#guardar').click(function(event){
         event.preventDefault();
         var valido=1;
@@ -55,7 +55,7 @@
             }); 
         }
     }); 
-    //---------- Boton de cancelar edicion de producto del inventario
+    //---------- Boton de cancelar edicion de contraseña
      $('#cancelar').click(function(event){
         event.preventDefault();
         $.ajax({ 

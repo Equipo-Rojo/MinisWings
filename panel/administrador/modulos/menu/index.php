@@ -15,7 +15,7 @@
             </li>
           
             <li class="pure-menu-item menu-item-divided">
-                <a href="page" class="pure-menu-link"><i class="fa fa-globe fa-lg" aria-hidden="true"></i> Página Principal</a>
+                <a href="page" class="pure-menu-link"><i class="fa fa-globe fa-lg" aria-hidden="true"></i> Página Web</a>
             </li>
           
             <li class="pure-menu-item menu-item-divided">
@@ -25,8 +25,16 @@
             <li class="pure-menu-item">
                 <a href="venta" class="pure-menu-link"><i class="fa fa-usd fa-lg" aria-hidden="true"></i> Ventas</a>
             </li>
-                      
+            
             <li class="pure-menu-item menu-item-divided">
+                <a href="platillo" class="pure-menu-link"> Promociones</a>
+            </li>
+
+            <li class="pure-menu-item">
+                <a href="platillo" class="pure-menu-link"> Combos</a>
+            </li>
+
+            <li class="pure-menu-item ">
                 <a href="platillo" class="pure-menu-link"><i class="fa fa-cutlery fa-lg" aria-hidden="true"></i> Platillos</a>
             </li>
 
