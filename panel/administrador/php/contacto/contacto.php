@@ -79,7 +79,7 @@
             });  
         }
         else{
-            alert("Faltan campos");
+            alertify.alert("Faltan campos");
         }
     }); 
     //---------- Boton de cancelar edicion de producto del inventario

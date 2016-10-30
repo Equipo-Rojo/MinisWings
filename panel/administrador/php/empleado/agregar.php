@@ -48,6 +48,7 @@
 </form>
 
 <script type="text/javascript">
+
     //---------- Boton de eliminar empleado del empleado
     $('#guardar').click(function(event){
         event.preventDefault();
@@ -80,7 +81,7 @@
             });  
         }
         else{
-           alert("Faltan campos");
+           alertify.alert("Faltan campos");
         }
     }); 
     //---------- Boton de cancelar edicion de empleado 

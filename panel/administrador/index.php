@@ -21,6 +21,7 @@ if(!isset($_SESSION['user'])){
 			
 	    </div>
 	    <!-- ZONA DE SCRIPTS -->
+	    <script src="../../js/alertify.min.js"></script>
 	    <script src="../../js/jquery.min.js"></script>
     	<script src="../../js/shell.js"></script>
     	<script src="../../js/menu.js"></script>
