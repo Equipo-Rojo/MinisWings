@@ -70,7 +70,6 @@
         });
 
         if(valido==1){
-
             var datosJSON = JSON.stringify(datos);
             var camposJSON = JSON.stringify(campos);
             $.ajax({ 

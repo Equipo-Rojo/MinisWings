@@ -7,7 +7,6 @@
 	<link rel="shortcut icon" href="../../img/logo_icon.ico" type="image/ico">
 	<link rel="stylesheet" href="../../css/pure-min.css">
 	<link rel="stylesheet" href="../../css/font-awesome.min.css">
-
 	<!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:200">-->
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="../../css/baby-blue.css">
@@ -19,7 +18,4 @@
 	    <script src="../../js/html5shiv.js"></script>
 	<![endif]-->
 	<link rel="stylesheet" href="../../css/buttons.css">
-    <link rel="stylesheet" href="../../../../../Proyectos/MinisWings/css/alertify.css">
-    <link rel="stylesheet" type="text/css" href="../../../../../Proyectos/MinisWings/css/bootstrap.css">
-
 </head>

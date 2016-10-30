@@ -71,9 +71,9 @@ class inventario
         $sql.="WHERE id_Inv=".$id;
         $this->conectar();
         $result = $this->con->query($sql);
-        if($this->con->affected_rows){
+        /*if($this->con->affected_rows){
             echo 'modulos/menu/inventario.php';
-        }      
+        }  */    
         $this->con->close();
     }
     //--------------- Agregar producto al inventario

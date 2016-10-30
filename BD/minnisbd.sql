@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2016 a las 02:03:44
+-- Tiempo de generación: 30-10-2016 a las 05:09:35
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -43,8 +43,8 @@ CREATE TABLE `contactos` (
   `nombre` varchar(50) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `facebook` varchar(50) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
-  `celular` varchar(15) NOT NULL
+  `telefono` varchar(20) NOT NULL,
+  `celular` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `contactos` (
 --
 
 INSERT INTO `contactos` (`id`, `nombre`, `direccion`, `facebook`, `telefono`, `celular`) VALUES
-(1, 'Erick Vargas', 'Avenida Tecnológico #1500, Col. Lomas de Santiaguito. Morelia, Mich.', 'https://www.facebook.com/soldadospimienta/', '', '');
+(1, 'Erick Vargas', 'Avenida Tecnológico #1500, Col. Lomas de Santiaguito. Morelia, Mich.', 'https://www.facebook.com/soldadospimienta/', '(443) 2-33-43-28', '443-168-1705');
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,10 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`id_Em`, `nickname`, `Nombre`, `Apellido`, `Rol`, `Contraseña`, `Estado`) VALUES
-(1, 'eVargas', 'Erick', 'Vargas', 'Administrador', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 'activo');
+(1, 'eVargas', 'Erick', 'Vargas', 'Administrador', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 'activo'),
+(2, 'dCornejo', 'Daniel', 'Cornejo', 'Barman', 'd06118bcb774f0f949513b7c2c9fcb459dfcd001', 'activo'),
+(3, 'aCarrillo', 'Armando', 'Carrillo', 'Mesero', 'd690dc5b7be4979b4fc7d4911e9a87dda56820cd', 'inactivo'),
+(17, 'aMartinez', 'Antonio', 'Martinez', 'eVargas', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -112,9 +115,10 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id_Inv`, `nombre`, `medida`, `cantidad`, `minimo`, `descripcion`, `status`) VALUES
-(1, 'Alitas', 'pza', 100, 100, 'Alitas de pollo empanizado', 'activo'),
+(1, 'Alitas', 'pza', 100, 100, 'Alitas de pollo', 'activo'),
 (2, 'Carne', 'grs.', 5000, 1000, 'Porción de carne', 'inactivo'),
-(3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'activo');
+(3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'inactivo'),
+(4, 'Cerveza Corona', 'ml', 50, 20, 'Cerveza Corona 355ml', 'activo');
 
 -- --------------------------------------------------------
 
@@ -350,12 +354,12 @@ ALTER TABLE `cuentas`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `id_Em` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_Em` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id_Inv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Inv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
