@@ -11,7 +11,7 @@
                 $cant = new inventario();
             ?>
             <li class="pure-menu-item menu-item-divided">
-                <a id="alert" href="alert" class="pure-menu-link"><i class="fa fa-exclamation-circle" aria-hidden="true"> <?php $cant->contarAlerta(); ?></i> Alertas</a>
+                <a id="alert" href="alert" class="pure-menu-link"><i class="fa fa-exclamation-circle" aria-hidden="true"> <?php /*$cant->contarAlerta();*/ ?></i> Alertas</a>
             </li>
           
             <li class="pure-menu-item menu-item-divided">

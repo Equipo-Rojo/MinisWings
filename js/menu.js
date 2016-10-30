@@ -20,14 +20,16 @@ $(document).ready(function(){
             
         }
     });
-    $('div#main').click(function(event){
+    /*$('div#main').click(function(event){
+        //alert('alert');
         $.ajax({ 
-                type: "POST", 
-                url: 'modulos/menu/contAlert.php',  
-                success: function(data) {              
-                    $("a#alert.pure-menu-link").empty();
-                    $("a#alert.pure-menu-link").append(data);
-                }  
-            });  
-    });
+            type: "POST", 
+            url: 'modulos/menu/contAlert.php',  
+            success: function(data) {              
+                $("a#alert.pure-menu-link").empty();
+                $("a#alert.pure-menu-link").append(data);
+                alert('alert');
+            }  
+        });  
+    });*/
 });
