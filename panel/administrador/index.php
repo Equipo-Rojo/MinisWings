@@ -24,7 +24,6 @@ if(!isset($_SESSION['user'])){
 	    <script src="../../js/jquery.min.js"></script>
     	<script src="../../js/shell.js"></script>
     	<script src="../../js/menu.js"></script>
-        <script src="../../js/alertify.min.js"></script>
 	</body>
 </html>
 <?php }
