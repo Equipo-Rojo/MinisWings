@@ -17,10 +17,11 @@
 	<!--[if lt IE 9]>
 	    <script src="../../js/html5shiv.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" href="../../css/buttons.css">
+	
     <link rel="stylesheet" href="../../../../../Proyectos/MinisWings/css/alertify.css">
     <link rel="stylesheet" type="text/css" href="../../../../../Proyectos/MinisWings/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../../../../Proyectos/MinisWings/css/Movimiento.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
 
 
 </head>

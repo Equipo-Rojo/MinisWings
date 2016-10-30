@@ -87,7 +87,7 @@
         event.preventDefault();
         $.ajax({ 
             type: "POST", 
-            url: 'modulos/menu/alert.php',  
+            url: 'modulos/menu/page.php',  
             success: function(data) {
                 $("div#main").empty();
                 $("div#main").append(data);

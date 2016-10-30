@@ -28,7 +28,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Dirección</th>
-                    <th>Facebook</th>
+                    <th id="Fbook">Facebook</th>
                     <th>Telefono</th>
                     <th>Celular</th>
                 </tr>

@@ -41,7 +41,7 @@ class contacto
                         $platillo .= '<tr>
                         <td class="highlight">'.$row['nombre'].'</td>
                         <td class="highlight">'.$row['direccion'].'</td>
-                        <td class="highlight">'.$row['facebook'].'</td>   
+                        <td id="Fbook"><a>'.$row['facebook'].'</a></td>   
                         <td class="highlight">'.$row['telefono'].'</td>
                         <td class="highlight">'.$row['celular'].'</td>
                         </tr>';
