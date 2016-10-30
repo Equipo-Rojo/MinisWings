@@ -15,7 +15,10 @@ if(!isset($_SESSION['user'])){
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		</div>
         <div id="main" class="content">
-			<?php include('modulos/menu/home.php'); ?>
+  
+        	<?php include('modulos/menu/home.php'); ?>
+      
+			
 	    </div>
 	    <!-- ZONA DE SCRIPTS -->
 	    <script src="../../js/jquery.min.js"></script>

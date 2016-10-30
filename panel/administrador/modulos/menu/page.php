@@ -2,13 +2,13 @@
     <h1>Pagina principal</h1>
     <h2>Promociones vigentes</h2>
     <div class="table-responsive">
-        <table class="mq-table pure-table-bordered pure-table">
+        <table class="pure-table pure-table-horizontal">
             <thead>
                 <tr>
-                    <th class="highlight">Nombre</th>
-                    <th class="highlight">Fecha</th>
-                    <th class="highlight">Precio</th>
-                    <th class="highlight">Estado</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,14 +23,14 @@
     <h2>Datos de contacto</h2>
     <button class="button-xlarge button-warning pure-button edite-contacto"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
     <div class="table-responsive">
-        <table class="mq-table pure-table-bordered pure-table">
+        <table class="pure-table pure-table-horizontal">
             <thead>
                 <tr>
-                    <th class="highlight">Nombre</th>
-                    <th class="highlight">Dirección</th>
-                    <th class="highlight">Facebook</th>
-                    <th class="highlight">Telefono</th>
-                    <th class="highlight">Celular</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Facebook</th>
+                    <th>Telefono</th>
+                    <th>Celular</th>
                 </tr>
             </thead>
             <tbody>

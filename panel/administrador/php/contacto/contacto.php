@@ -7,6 +7,8 @@
     $result = $con->query($sql);
     $contacto = $result->fetch_assoc();
 ?>
+<div class="General">
+    
 <h1>Editar Contacto</h1>
 <form class="pure-form pure-form-stacked" name="edit_inventario" method="POST">
     <fieldset>
@@ -43,6 +45,8 @@
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
 </form>
+    
+</div>
 
 <script type="text/javascript">
     //---------- Boton de eliminar producto del inventario

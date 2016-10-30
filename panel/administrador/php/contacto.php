@@ -1,3 +1,5 @@
+
+    
 <?php
 
 class contacto
@@ -9,13 +11,13 @@ class contacto
     private $db="";
     private $con;
     
-	public function __construct() {
-		include('datosServer.php');
-		$this->host = $ho;
-		$this->user = $us;
-		$this->pw = $pw;
-		$this->db = $db;	
-	}    
+    public function __construct() {
+        include('datosServer.php');
+        $this->host = $ho;
+        $this->user = $us;
+        $this->pw = $pw;
+        $this->db = $db;    
+    }    
     
     //--------------- función para conectar
     public function conectar()
@@ -67,3 +69,6 @@ class contacto
         $this->con->close();
     }
 }
+
+?>
+
