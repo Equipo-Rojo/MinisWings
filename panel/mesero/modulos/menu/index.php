@@ -6,11 +6,7 @@
         <a class="pure-menu-heading" href="">Minni´s Wings</a>
         <legend>Mesero</legend>
         <ul class="pure-menu-list">
-          
-            <li class="pure-menu-item menu-item-divided">
-                <a href="home" class="pure-menu-link"><i class="fa fa-home fa-lg" aria-hidden="true"></i> Inicio</a>
-            </li>
-          
+
             <li class="pure-menu-item">
                 <a href="orden" class="pure-menu-link"><i class="fa fa-list fa-lg" aria-hidden="true"></i> Órdenes</a>
             </li>

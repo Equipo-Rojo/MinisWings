@@ -1,5 +1,5 @@
 <div class="orden1">
-    <h1>Ordenes</h1>
+    <h1>Ordenes pendientes</h1>
     <!--<button class="button-xlarge button-warning pure-button add-cuenta"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Cuenta/Mesa</button>-->
     <br/><br/>
     <div id="panel-cuentas">
@@ -11,57 +11,25 @@
     </div>
 </div>
 <script type="text/javascript">
-     //---------- Boton de agregar cuenta
-    $('.add-cuenta').click(function(event){
-        $.ajax({ 
-            type: "POST", 
-            url: 'php/ordenes/add-cuenta.php',  
-            success: function(data) {  
-                $("div#main").empty();
-                $("div#main").append(data);
-            }  
-        });  
-    });
-    //---------- Boton de agregar orden
-    $('.add-orden').click(function(event){
-        
-        var id_cue=$(this).attr('id');
-
-        $.ajax({
-            data:{id_Cue:id_cue}, 
-            type: "POST", 
-            url: 'php/ordenes/add-orden.php',  
-            success: function(data) {  
-                $("div#main").empty();
-                $("div#main").append(data);
-            }  
-        });  
-    });
-    //---------- Boton de pagar cuenta
-    $('.pay-cuenta').click(function(event){
-        var id_cue=$(this).attr('id');
-        $.ajax({ 
-            data:{id_Cue:id_cue}, 
-            type: "POST", 
-            url: 'php/ordenes/pay-cuenta.php',  
-            success: function(data) {  
-                $("div#main").empty();
-                $("div#main").append(data);
-            }  
-        }); 
-    });
     //---------- Boton de editar cuenta
-    $('.edite-cuenta').click(function(event){
+    $('.change-status').click(function(event){
         
-        var id_cue=$(this).attr('id');
-
+        var id_Ord=$(this).attr('id');
+        
         $.ajax({
-            data:{id_Cue:id_cue}, 
+            data:{id_Ord:id_Ord}, 
             type: "POST", 
-            url: 'php/ordenes/editar-cuenta.php',  
+            url: 'php/ordenes/editar-orden.php',  
             success: function(data) {  
-                $("div#main").empty();
-                $("div#main").append(data);
+                alertify.alert(data);
+                $.ajax({ 
+                    type: "POST", 
+                    url: 'modulos/menu/orden.php',  
+                    success: function(data) {  
+                        $("div#main").empty();
+                        $("div#main").append(data);
+                    }  
+                });  
             }  
         });  
     });   

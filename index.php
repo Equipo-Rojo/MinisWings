@@ -18,6 +18,10 @@
         <!--[if lt IE 9]>
             <script src="../js/html5shiv.js"></script>
         <![endif]-->
+        <link rel="stylesheet" href="css/alertify.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/Movimiento.css">
+        <link rel="stylesheet" href="css/buttons.css">
     </head>
     <body>
         <div id="main" class="content">
@@ -30,7 +34,9 @@
           </form>  
           </div>
     </body>
-     <script src="js/alertify.min.js"></script>
+     <!-- ZONA DE SCRIPTS -->
+        <script src="../../js/alertify.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
 </html>
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
