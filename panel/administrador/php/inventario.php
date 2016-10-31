@@ -35,12 +35,12 @@ class inventario
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                         $producto .= '<tr>
-                        <td class="highlight">'.$row['nombre'].'</td>
-                        <td class="highlight">'.$row['descripcion'].'</td>
-                        <td class="highlight">'.$row['cantidad'].'</td>
-                        <td class="highlight">'.$row['minimo'].'</td>
-                        <td class="highlight"><i id="'.$row['id_Inv'].'" class="fa fa-pencil-square-o edite-inventario" aria-hidden="true"></i></td>
-                        <td class="highlight"><i id="'.$row['id_Inv'].'" class="fa fa-trash delete-inventario" aria-hidden="true"></i></td> 
+                        <td>'.$row['nombre'].'</td>
+                        <td>'.$row['descripcion'].'</td>
+                        <td>'.$row['cantidad'].'</td>
+                        <td>'.$row['minimo'].'</td>
+                        <td><i id="'.$row['id_Inv'].'" class="fa fa-pencil-square-o edite-inventario" aria-hidden="true"></i></td>
+                        <td><i id="'.$row['id_Inv'].'" class="fa fa-trash delete-inventario" aria-hidden="true"></i></td> 
                         </tr>';
                 }
             }
@@ -111,10 +111,10 @@ class inventario
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                     $producto .= '<tr>
-                    <td class="highlight">'.$row['nombre'].'</td>
-                    <td class="highlight">'.$row['descripcion'].'</td>
-                    <td class="highlight">'.$row['cantidad'].'</td>
-                    <td class="highlight">'.$row['minimo'].'</td>
+                    <td>'.$row['nombre'].'</td>
+                    <td>'.$row['descripcion'].'</td>
+                    <td>'.$row['cantidad'].'</td>
+                    <td>'.$row['minimo'].'</td>
                     </tr>';
             }
         }

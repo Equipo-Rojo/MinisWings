@@ -37,12 +37,12 @@ class platillo
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                         $platillo .= '<tr>
-                        <td class="highlight">'.$row['nombre'].'</td>
-                        <td class="highlight">'.$row['categoria'].'</td>
-                        <td class="highlight">'.$row['precio'].'</td>
-                        <td class="highlight">'.$row['descripcion'].'</td>   
-                        <td class="highlight"><i id="'.$row['id_Plat'].'" class="fa fa-pencil-square-o edite-platillo" aria-hidden="true"></i></td>
-                        <td class="highlight"><i id="'.$row['id_Plat'].'" class="fa fa-trash delete-platillo" aria-hidden="true"></i></td> 
+                        <td>'.$row['nombre'].'</td>
+                        <td>'.$row['categoria'].'</td>
+                        <td>'.$row['precio'].'</td>
+                        <td>'.$row['descripcion'].'</td>   
+                        <td><i id="'.$row['id_Plat'].'" class="fa fa-pencil-square-o edite-platillo" aria-hidden="true"></i></td>
+                        <td><i id="'.$row['id_Plat'].'" class="fa delete-platillo" aria-hidden="true"><span class="fa-trash"></span></i></td> 
                         </tr>';
                 }
             }

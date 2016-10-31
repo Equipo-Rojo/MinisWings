@@ -14,10 +14,11 @@ if(!isset($_SESSION['user'])){
 		<?php include('modulos/menu/index.php'); ?>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		</div>
+		     <div class="General">
         <div id="main" class="content">
-  
-        	<?php include('modulos/menu/home.php'); ?>
-      
+
+     	<?php include('modulos/menu/home.php'); ?>
+     </div>
 			
 	    </div>
 	    <!-- ZONA DE SCRIPTS -->

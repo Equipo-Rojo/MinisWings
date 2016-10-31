@@ -5,11 +5,11 @@
     <table class="mq-table pure-table-bordered pure-table">
         <thead>
             <tr>
-                <th class="highlight">Nombre</th>
-                <th class="highlight">Apellidos</th>
-                <th class="highlight">Roll</th>
-                <th class="highlight">Editar</th>
-                <th class="highlight">Eliminar</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Roll</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>

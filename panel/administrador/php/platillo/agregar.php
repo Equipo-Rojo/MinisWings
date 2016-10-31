@@ -47,9 +47,9 @@
                 $ing -> listarIngrediente(1);
             ?>
         </div>
-        <button id="agregar" type="button" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Ingrediente</button>
+        <button id="agregar" type="button" class="pure-button button-secondary"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Ingrediente</button>
         <button id="borrar" type="button" class="pure-button button-warning"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Ingrediente</button>
-        <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+        <button id="guardar" type="submit" class="pure-button button-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
 </form>

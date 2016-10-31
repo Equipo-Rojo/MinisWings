@@ -6,12 +6,12 @@
     <table class="mq-table pure-table-bordered pure-table">
         <thead>
             <tr>
-                <th class="highlight">Producto</th>
-                <th class="highlight">Descripción</th>
-                <th class="highlight">Existencia</th>
-                <th class="highlight">Stock minimo</th>
-                <th class="highlight">Editar</th>
-                <th class="highlight">Eliminar</th>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Existencia</th>
+                <th>Stock minimo</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>

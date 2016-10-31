@@ -1,3 +1,6 @@
+
+
+
  #Fbook{
 	width: 20px;
     overflow-y: auto;
@@ -6,11 +9,46 @@
 
 }
 
-@media (min-device-width: 425px) and (max-device-width: 1024px){
+#menu{
+	background-color:#1E2019;
+	color:#D3D0CB;
+}
+#menu .pure-menu li a:hover, #menu .pure-menu li a:focus{
+	color:#EFCB3A;
+	background-color: : yellow;
 
-.orden1, .pagina, .General{
-	
-	padding-left: 200px;
 }
 
+thead th{
+
+background-color:#1E2019 ;
+color: rgba(211, 208, 203, 1);;
+
+}
+tbody tr {
+background-color: #D3D0CB;
+color: black;
+}
+
+
+
+.fa-trash{
+	color: #931621;
+	font-size: 3em;
+}
+.fa-pencil-square-o{
+color: #008148;
+font-size: 3em;
+
+
+}
+@media (min-device-width: 425px) and (max-device-width: 1024px){
+
+.General{
+	
+	padding-left: 100px;
+}
+ *{
+ 	font-size: 1.03em;
+ }
 }

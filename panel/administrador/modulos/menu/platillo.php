@@ -1,16 +1,16 @@
 <h1>Platillos</h1>
-<button class="button-xlarge button-warning pure-button add-platillo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+<button class="button-xlarge button-secondary pure-button add-platillo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
 <br/><br/>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">
         <thead>
             <tr>
-                <th class="highlight">Nombre</th>
-                <th class="highlight">Categoria</th>
-                <th class="highlight">Precio</th>
-                <th class="highlight">Descripción</th>
-                <th class="highlight">Editar</th>
-                <th class="highlight">Eliminar</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>

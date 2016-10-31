@@ -41,7 +41,7 @@
             </div>
         </div>
         <br/><br/>
-        <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+        <button id="guardar" type="submit" class="pure-button button-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
 </form>
