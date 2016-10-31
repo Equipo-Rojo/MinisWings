@@ -383,7 +383,7 @@ class orden
             $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$mesa;
             $result = $this->con->query($sql);
             $fecha=date("Y-m-d H:i:s");    
-            $sql = $sql = "UPDATE venta SET Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
+            $sql = $sql = "UPDATE venta SET Estado='Cerrada', Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
 
             echo "Mesa #".$mesa." Pagada";   
@@ -430,7 +430,7 @@ class orden
             $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$mesa;
             $result = $this->con->query($sql);
             $fecha=date("Y-m-d H:i:s");    
-            $sql = $sql = "UPDATE venta SET Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
+            $sql = $sql = "UPDATE venta SET Estado='Cortesia', Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
 
             echo "Mesa #".$mesa." Pagada con cortesia";   

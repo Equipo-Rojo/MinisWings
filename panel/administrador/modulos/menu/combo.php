@@ -1,15 +1,15 @@
 <h1>Combos</h1>
-<button class="button-xlarge button-warning pure-button add-combo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+<button class="button-xlarge button-secondary pure-button add-combo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
 <br/><br/>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">
         <thead>
             <tr>
-                <th class="highlight">Nombre</th>
-                <th class="highlight">Descripción</th>
-                <th class="highlight">Precio</th>
-                <th class="highlight">Editar</th>
-                <th class="highlight">Eliminar</th>
+                <th class="">Nombre</th>
+                <th class="">Descripción</th>
+                <th class="">Precio</th>
+                <th class="">Editar</th>
+                <th class="">Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
     $('.delete-combo').click(function(event){
 
         var id=$(this).attr('id');
-        alertify.alertify.alert("Eliminado");
+        alertify.alert("Eliminado");
         $.ajax({ 
             data : {id:id},
             type: "POST", 

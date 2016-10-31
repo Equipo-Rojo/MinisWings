@@ -1,16 +1,16 @@
 <h1>Promociones</h1>
-<button class="button-xlarge button-warning pure-button add-promo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+<button class="button-xlarge button-secondary pure-button add-promo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
 <br/><br/>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">
         <thead>
             <tr>
-                <th class="highlight">Nombre</th>
-                <th class="highlight">Descripción</th>
-                <th class="highlight">Precio</th>
-                <th class="highlight">Fecha</th>
-                <th class="highlight">Editar</th>
-                <th class="highlight">Eliminar</th>
+                <th class="">Nombre</th>
+                <th class="">Descripción</th>
+                <th class="">Precio</th>
+                <th class="">Fecha</th>
+                <th class="">Editar</th>
+                <th class="">Eliminar</th>
             </tr>
         </thead>
         <tbody>

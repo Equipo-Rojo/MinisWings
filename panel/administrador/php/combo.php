@@ -37,11 +37,11 @@ class combo
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                         $combo .= '<tr>
-                        <td class="highlight">'.$row['nombre'].'</td>
-                        <td class="highlight">'.$row['descripcion'].'</td> 
-                        <td class="highlight">'.$row['precio'].'</td>
-                        <td class="highlight"><i id="'.$row['id_Comb'].'" class="fa fa-pencil-square-o edite-combo" aria-hidden="true"></i></td>
-                        <td class="highlight"><i id="'.$row['id_Comb'].'" class="fa fa-trash delete-combo" aria-hidden="true"></i></td> 
+                        <td class="">'.$row['nombre'].'</td>
+                        <td class="">'.$row['descripcion'].'</td> 
+                        <td class="">'.$row['precio'].'</td>
+                        <td class=""><i id="'.$row['id_Comb'].'" class="fa fa-pencil-square-o edite-combo" aria-hidden="true"></i></td>
+                        <td class=""><i id="'.$row['id_Comb'].'" class="fa fa-trash delete-combo" aria-hidden="true"></i></td> 
                         </tr>';
                 }
             }

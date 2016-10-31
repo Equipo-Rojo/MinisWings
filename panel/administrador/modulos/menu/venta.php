@@ -1,22 +1,23 @@
 <h1>Ventas</h1>
-    <div class="table-responsive">
-        <table class="mq-table pure-table-bordered pure-table">
-            <thead>
-                <tr>
-                    <th >Key</th>
-                    <th >CSS Media Query</th>
-                    <th >Applies</th>
-                    <th >Classname</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td ><i>None</i></td>
-                    <td ><i>None</i></td>
-                    <td ><i>Always</i></td>
-                    <td ><code>.pure-u-*</code></td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </div>
+<button class="button-xlarge button-secondary pure-button add-promo"><i class="fa fa-plus" aria-hidden="true"></i> Corte de caja    </button>
+<div class="table-responsive">
+    <table class="mq-table pure-table-bordered pure-table">
+        <thead>
+            <tr>
+                <th ># Cuenta</th>
+                <th >Estado</th>
+                <th >Apertura</th>
+                <th >Cierre</th>
+                <th >Total</th>
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+        include('../../php/venta.php');
+        $ven = new venta();
+        $ven -> listarVenta();
+        ?>
+            
+        </tbody>
+    </table>
+</div>
