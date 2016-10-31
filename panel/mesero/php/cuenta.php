@@ -32,7 +32,7 @@ class orden
         session_start();
         $id_em=$_SESSION['id'];
         $cuenta="";
-        $sql = "SELECT * FROM cuentas WHERE Estatus='Abierta'";
+        $sql = "SELECT * FROM cuentas WHERE Estatus='Abierta' AND id_Em=".$id_em;
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -43,7 +43,6 @@ class orden
                     <legend>Mesa '.$row['NumMesa'].'</legend>
                     <button id="'.$row['id_Cue'].'" class="add-orden button-xlarge button-warning pure-button"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Orden</button>
                     <button id="'.$row['id_Cue'].'" class="edite-cuenta pure-button button-secondary"><i class="fa ffa-pencil" aria-hidden="true"></i> Editar cuenta</button>
-                    <button id="'.$row['id_Cue'].'" class="pay-cuenta pure-button button-error"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Pagar cuenta</button>
                     <br/><br/>
 
                     <div class="table-responsive">
@@ -281,162 +280,5 @@ class orden
         echo $orden;
         $this->con->close();
     }
-    //--------------- Listar detalle de cuenta
-    public function detalleCuenta($id_Cue)
-    {
-        $this->conectar();
-        $total=0;
-        $orden='<div class="table-responsive">
-                    <table class="pure-table pure-table-horizontal">
-                        <thead>
-                            <tr>
-                                <th>Cant</th>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th>Precio</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-        $sql1 = "SELECT * FROM orden WHERE id_Cue=".$id_Cue;
-        $result1 = $this->con->query($sql1);
-        if ($result1->num_rows > 0) {
-            while($row1 = $result1->fetch_assoc()) 
-            {
-                switch($row1['tipo']){
-                    case 'platillo':                                    
-                       $sql2 = "SELECT * FROM platillo WHERE id_Plat=".$row1['id_Menu'];
-                       break;
-                    case 'combos':
-                        $sql2 = "SELECT * FROM combos WHERE id_Comb=".$row1['id_Menu'];
-                        break;
-                    case 'promos':
-                        $sql2 = "SELECT * FROM promos WHERE id_Promo=".$row1['id_Menu'];
-                        break;
-                }
-                $result2 = $this->con->query($sql2);
-                if ($result2->num_rows > 0) {
-                    $row2 = $result2->fetch_assoc();
-                    $orden.='
-                    <tr>
-                        <td>'.$row1['cantidad'].'</td>
-                        <td>'.$row2['nombre'].'</td>
-                        <td>'.$row1['tipo'].'</td>
-                        <td>$ $ '.number_format($row2['precio'],2).'</td>
-                        <td>$ '.number_format(($row1['cantidad']*$row2['precio']),2).'</td>
-                    </tr>';
-                    $total+=($row1['cantidad']*$row2['precio']);
-                }
-            }
-        }
-            
-        $orden.='
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td>$ '.number_format($total,2).'</td>
-        </tr>
-        </tbody>
-        </table>';
-       
-        echo $orden;
-        $this->con->close();
-    }
-    //--------------- Pagar cuenta
 
-    public function pagarCuenta($id_Cue,$mesa)
-    {
-        $this->conectar();
-        $total=0;
-        $pagar=1;
-        $sql1 = "SELECT * FROM orden WHERE id_Cue=".$id_Cue;
-        $result1 = $this->con->query($sql1);
-        if ($result1->num_rows > 0) {
-            while($row1 = $result1->fetch_assoc()) 
-            {
-                switch($row1['tipo']){
-                    case 'platillo':                                    
-                       $sql2 = "SELECT * FROM platillo WHERE id_Plat=".$row1['id_Menu'];
-                       break;
-                    case 'combos':
-                        $sql2 = "SELECT * FROM combos WHERE id_Comb=".$row1['id_Menu'];
-                        break;
-                    case 'promos':
-                        $sql2 = "SELECT * FROM promos WHERE id_Promo=".$row1['id_Menu'];
-                        break;
-                }
-                $result2 = $this->con->query($sql2);
-                if ($result2->num_rows > 0) {
-                    $row2 = $result2->fetch_assoc();
-                    $total+=($row1['cantidad']*$row2['precio']);
-                    if($row1['estado']!="Servido" && $row1['estado']!="Cancelado"){
-                        $pagar=0;
-                    }
-                }
-            }
-        }
-        if($pagar>0){
-            $sql = "UPDATE cuentas SET Total=".$total.", Estatus='Pagada' WHERE id_Cue=".$id_Cue;
-            $result = $this->con->query($sql);
-            $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$mesa;
-            $result = $this->con->query($sql);
-            $fecha=date("Y-m-d H:i:s");    
-            $sql = $sql = "UPDATE venta SET Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
-            $result = $this->con->query($sql);
-
-            echo "Mesa #".$mesa." Pagada";   
-        }else{
-            echo "No se puede cobrar!! Aun hay ordenes pendientes";
-        }
-        $this->con->close();
-    }
-    //----------------------Cortesia pagada
-    public function Cortesia($id_Cue,$mesa)
-    {
-        $this->conectar();
-        $total=0;
-        $pagar=1;
-        $sql1 = "SELECT * FROM orden WHERE id_Cue=".$id_Cue;
-        $result1 = $this->con->query($sql1);
-        if ($result1->num_rows > 0) {
-            while($row1 = $result1->fetch_assoc()) 
-            {
-                switch($row1['tipo']){
-                    case 'platillo':                                    
-                       $sql2 = "SELECT * FROM platillo WHERE id_Plat=".$row1['id_Menu'];
-                       break;
-                    case 'combos':
-                        $sql2 = "SELECT * FROM combos WHERE id_Comb=".$row1['id_Menu'];
-                        break;
-                    case 'promos':
-                        $sql2 = "SELECT * FROM promos WHERE id_Promo=".$row1['id_Menu'];
-                        break;
-                }
-                $result2 = $this->con->query($sql2);
-                if ($result2->num_rows > 0) {
-                    $row2 = $result2->fetch_assoc();
-                    $total+=($row1['cantidad']*$row2['precio']);
-                    if($row1['estado']!="Servido" && $row1['estado']!="Cancelado"){
-                        $pagar=0;
-                    }
-                }
-            }
-        }
-        if($pagar>0){
-            $sql = $sql = "UPDATE cuentas SET Total=".$total.", Estatus='Cortesia' WHERE id_Cue=".$id_Cue;
-            $result = $this->con->query($sql);
-            $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$mesa;
-            $result = $this->con->query($sql);
-            $fecha=date("Y-m-d H:i:s");    
-            $sql = $sql = "UPDATE venta SET Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
-            $result = $this->con->query($sql);
-
-            echo "Mesa #".$mesa." Pagada con cortesia";   
-        }else{
-            echo "No se puede cobrar!! Aun hay ordenes pendientes";
-        }
-        $this->con->close();
-    }
 }

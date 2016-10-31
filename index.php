@@ -30,6 +30,7 @@
           </form>  
           </div>
     </body>
+     <script src="js/alertify.min.js"></script>
 </html>
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

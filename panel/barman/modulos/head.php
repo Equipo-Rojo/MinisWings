@@ -17,5 +17,9 @@
 	<!--[if lt IE 9]>
 	    <script src="../../js/html5shiv.js"></script>
 	<![endif]-->
+	<link rel="stylesheet" href="../../css/alertify.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../css/Movimiento.css">
+
 	<link rel="stylesheet" href="../../css/buttons.css">
 </head>
