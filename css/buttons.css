@@ -8,17 +8,18 @@
 }
 
 .button-success {
- background-color: #D24544; /* this is a green */
+ background-color: #306BAC; /* this is a green */
 }
 
 .button-error {
- background-color: #6F66D2; /* this is a maroon */
+ background-color: #F4442E; /* this is a maroon */
 }
 
 .button-warning {
-    background-color: #D044D2; /* this is an orange */
+    background-color: #efe93a;
+    color: #030200; /* this is an orange */
 }
 
 .button-secondary {
- background-color: #D24544; /* this is a light blue */
+ background-color: #020122; /* this is a light blue */
 }
