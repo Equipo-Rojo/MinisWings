@@ -1,5 +1,5 @@
 <h1>Platillos</h1>
-<button class="button-xlarge button-warning pure-button add-platillo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+<button class="button-xlarge button-secondary pure-button add-platillo"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
 <br/><br/>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">

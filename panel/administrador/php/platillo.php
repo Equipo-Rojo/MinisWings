@@ -42,7 +42,7 @@ class platillo
                         <td>'.$row['precio'].'</td>
                         <td>'.$row['descripcion'].'</td>   
                         <td><i id="'.$row['id_Plat'].'" class="fa fa-pencil-square-o edite-platillo" aria-hidden="true"></i></td>
-                        <td><i id="'.$row['id_Plat'].'" class="fa fa-trash delete-platillo" aria-hidden="true"></i></td> 
+                        <td><i id="'.$row['id_Plat'].'" class="fa delete-platillo" aria-hidden="true"><span class="fa-trash"></span></i></td> 
                         </tr>';
                 }
             }

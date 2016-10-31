@@ -15,21 +15,33 @@
 }
 #menu .pure-menu li a:hover, #menu .pure-menu li a:focus{
 	color:#EFCB3A;
-		background-color: : yellow;
+	background-color: : yellow;
 
 }
 
 thead th{
 
-background-color:#020122 ;
-color: white;
+background-color:#1E2019 ;
+color: rgba(211, 208, 203, 1);;
 
 }
 tbody tr {
-background-color: #EFCB3A;
+background-color: #D3D0CB;
 color: black;
 }
 
+
+
+.fa-trash{
+	color: #931621;
+	font-size: 3em;
+}
+.fa-pencil-square-o{
+color: #008148;
+font-size: 3em;
+
+
+}
 @media (min-device-width: 425px) and (max-device-width: 1024px){
 
 .General{

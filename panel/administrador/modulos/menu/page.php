@@ -21,7 +21,7 @@
         </table>
     </div>
     <h2>Datos de contacto</h2>
-    <button class="button-xlarge button-warning pure-button edite-contacto"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+    <button class="button-xlarge button-secondary pure-button edite-contacto"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
     <div class="table-responsive">
         <table class="pure-table pure-table-horizontal">
             <thead>
