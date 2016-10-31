@@ -58,4 +58,38 @@
     
             }  
         });  
+    });  
+    //---------- Boton de eliminar producto del promo
+    $('.delete-promo').click(function(event){
+        var id=$(this).attr('id');
+        alertify.alert("Eliminado");
+        $.ajax({ 
+            data : {id:id},
+            type: "POST", 
+            url: 'php/promo/eliminar.php',  
+            success: function(data) { 
+                $.ajax({ 
+                type: "POST", 
+                url: 'modulos/menu/page.php',  
+                success: function(data) {  
+                    $("div#main").empty();
+                    $("div#main").append(data);
+                }  
+                });
+            }  
+        });  
     });   
+     //---------- Boton de editar producto del promo
+    $('.edite-promo').click(function(event){
+        var id=$(this).attr('id');
+        $.ajax({ 
+            data : {id:id},
+            type: "POST", 
+            url: 'php/promo/editar.php',  
+            success: function(data) {  
+                $("div#main").empty();
+                $("div#main").append(data);
+            }  
+        });  
+    });  
+    </script>

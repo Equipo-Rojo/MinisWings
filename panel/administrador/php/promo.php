@@ -37,9 +37,9 @@ class promo
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                         $promo .= '<tr>
-                        <td class="highlight">'.$row['Nombre'].'</td>
+                        <td class="highlight">'.$row['nombre'].'</td>
                         <td class="highlight">'.$row['Descripcion'].'</td> 
-                        <td class="highlight">'.$row['Precio'].'</td>
+                        <td class="highlight">'.$row['precio'].'</td>
                         <td class="highlight">'.$row['Fecha'].'</td>
                         <td class="highlight"><i id="'.$row['id_Promo'].'" class="fa fa-pencil-square-o edite-promo" aria-hidden="true"></i></td>
                         <td class="highlight"><i id="'.$row['id_Promo'].'" class="fa fa-trash delete-promo" aria-hidden="true"></i></td> 

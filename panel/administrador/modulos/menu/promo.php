@@ -27,7 +27,7 @@
     $('.delete-promo').click(function(event){
 
         var id=$(this).attr('id');
-        alertify.alertify.alert("Eliminado");
+        alertify.alert("Eliminado");
         $.ajax({ 
             data : {id:id},
             type: "POST", 

@@ -1,5 +1,5 @@
 <div class="orden1">
-    <h1>Ordenes</h1>
+    <h1>Agrgar cuenta</h1>
     <button class="button-xlarge button-warning pure-button add-cuenta"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Cuenta/Mesa</button>
     <br/><br/>
     <div id="panel-cuentas">
@@ -15,9 +15,10 @@
     $('.add-cuenta').click(function(event){
         $.ajax({ 
             type: "POST", 
-            url: 'php/ordenes/cuenta.php',  
+            url: 'php/ordenes/add-cuenta.php',  
             success: function(data) {  
-                $("div#panel-cuentas").append(data);
+                $("div#main").empty();
+                $("div#main").append(data);
             }  
         });  
     });   
