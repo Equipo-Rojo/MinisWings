@@ -25,7 +25,7 @@ class orden
             die("Error en conexión: " . mysqli_connect_error());
         }    
     } 
-    //--------------- Listar inventario activo
+    //--------------- Listar cuentas
     public function listarCuentas()
     {
         $this->conectar();
@@ -42,6 +42,7 @@ class orden
                 <fieldset>
                     <legend>Mesa '.$row['NumMesa'].'</legend>
                     <button id="'.$row['id_Cue'].'" class="add-orden button-xlarge button-warning pure-button"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Orden</button>
+                    <button id="'.$row['id_Cue'].'" class="pay-cuenta pure-button button-error"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Pagar cuenta</button>
                     <br/><br/>
 
                     <div class="table-responsive">
@@ -143,6 +144,52 @@ class orden
         }      
         echo $mesa;
         $this->con->close();
+    }
+    //--------------- Listar cuentas
+    public function listarMenu()
+    {
+        $this->conectar();
+        $menu="";
+        $sql = "SELECT * FROM platillo";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) 
+        {
+            while($row = $result->fetch_assoc()) 
+            {
+                $menu.= '<option value="platillo-'.$row['id_Plat'].'">'.$row['nombre'].'</option>';
+            }
+        }
+        $sql = "SELECT * FROM combos";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) 
+        {
+            while($row = $result->fetch_assoc()) 
+            {
+                $menu.= '<option value="combos-'.$row['id_Plat'].'">Combo '.$row['nombre'].'</option>';
+            }
+        }
+        $sql = "SELECT * FROM promos";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) 
+        {
+            while($row = $result->fetch_assoc()) 
+            {
+                $menu.= '<option  value="promos-'.$row['id_Plat'].'">Promoción  '.$row['nombre'].'</option>';
+            }
+        }
+    
+        echo $menu;
+        $this->con->close();
+    }
+    public function nuevaOdren($id_Cue, $id, $tipo, $cantidad){
+        $this->conectar();
+        $sql = "INSERT INTO orden (id_Cue, id_Menu, tipo, cantidad,estado) VALUES(".$id_Cue.",".$id.",'".$tipo."',".$cantidad.",'Pedido')";
+        $result = $this->con->query($sql);
+        if($this->con->affected_rows){
+            echo "Exito!! Orden en espera";
+        }      
+        $this->con->close();
+
     }
 
 }

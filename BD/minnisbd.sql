@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2016 a las 05:12:26
+-- Tiempo de generación: 31-10-2016 a las 06:46:31
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -200,7 +200,10 @@ CREATE TABLE `orden` (
 INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `tipo`, `cantidad`, `estado`) VALUES
 (1, 1, 1, 'platillo', 1, 'Preparando'),
 (2, 1, 1, 'combos', 1, 'Pedido'),
-(3, 2, 1, 'promos', 1, 'Preparando');
+(3, 2, 1, 'promos', 1, 'Preparando'),
+(4, 7, 1, 'platillo', 1, 'Pedido'),
+(5, 7, 1, 'platillo', 2, 'Pedido'),
+(6, 7, 1, 'platillo', 1, 'Pedido');
 
 -- --------------------------------------------------------
 
@@ -436,7 +439,7 @@ ALTER TABLE `mesa`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `platillo`
 --
