@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2016 a las 01:17:16
+-- Tiempo de generación: 31-10-2016 a las 03:38:11
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -39,7 +39,7 @@ CREATE TABLE `combos` (
 --
 
 INSERT INTO `combos` (`id_Comb`, `nombre`, `descripcion`, `precio`, `Estado`) VALUES
-(1, 'Alitas y cerveza', '1 orden de alitas y 2 cervezas', 150.00, 'inactivo');
+(1, 'Alitas y cerveza', '1 orden de alitas y 2 cervezas', 150.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -77,6 +77,15 @@ CREATE TABLE `cuentas` (
   `Total` float(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `cuentas`
+--
+
+INSERT INTO `cuentas` (`id_Cue`, `Estatus`, `NumMesa`, `id_Em`, `Total`) VALUES
+(1, 'abierta', '1', 1, NULL),
+(2, 'abierta', '2', 1, NULL),
+(3, 'abierta', '3', 2, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -89,7 +98,7 @@ CREATE TABLE `empleado` (
   `Nombre` varchar(35) DEFAULT NULL,
   `Apellido` varchar(35) DEFAULT NULL,
   `Rol` varchar(25) DEFAULT NULL,
-  `Contraseña` varchar(50) DEFAULT NULL,
+  `Contraseña` varchar(100) DEFAULT NULL,
   `Estado` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -100,8 +109,8 @@ CREATE TABLE `empleado` (
 INSERT INTO `empleado` (`id_Em`, `nickname`, `Nombre`, `Apellido`, `Rol`, `Contraseña`, `Estado`) VALUES
 (1, 'eVargas', 'Erick', 'Vargas', 'Administrador', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 'activo'),
 (2, 'dCornejo', 'Daniel', 'Cornejo', 'Barman', 'd06118bcb774f0f949513b7c2c9fcb459dfcd001', 'activo'),
-(3, 'aCarrillo', 'Armando', 'Carrillo', 'Mesero', 'd690dc5b7be4979b4fc7d4911e9a87dda56820cd', 'inactivo'),
-(17, 'aMartinez', 'Antonio', 'Martinez', 'eVargas', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 'inactivo');
+(3, 'aCarrillo', 'Armando', 'Carrillo', 'Mesero', 'd690dc5b7be4979b4fc7d4911e9a87dda56820cd', 'activo'),
+(17, 'aMartinez', 'Antonio', 'Martinez', 'Cocinero', '34aeaebc66db027f02c2fd446dcdb8462af5d3c1', 'activo');
 
 -- --------------------------------------------------------
 
@@ -124,10 +133,10 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id_Inv`, `nombre`, `medida`, `cantidad`, `minimo`, `descripcion`, `status`) VALUES
-(1, 'Alitas', 'pza', 100, 100, 'Alitas de pollo', 'inactivo'),
+(1, 'Alitas', 'pza', 100, 100, 'Alitas de pollo', 'activo'),
 (2, 'Carne', 'grs.', 5000, 1000, 'Porción de carne', 'inactivo'),
 (3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'inactivo'),
-(4, 'Cerveza Corona', 'ml', 40, 20, 'Cerveza Corona 355ml', 'activo');
+(4, 'Cerveza Corona', 'ml', 40, 20, 'Cerveza Corona 355ml', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -154,6 +163,16 @@ CREATE TABLE `mesa` (
   `Estatus` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `mesa`
+--
+
+INSERT INTO `mesa` (`id_Mesa`, `NumMesa`, `Estatus`) VALUES
+(1, '1', 'Ocupada'),
+(2, '2', 'Ocupada'),
+(3, '3', 'Ocupada'),
+(4, '4', 'Libre');
+
 -- --------------------------------------------------------
 
 --
@@ -167,6 +186,13 @@ CREATE TABLE `orden` (
   `cantidad` int(11) DEFAULT NULL,
   `estado` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `orden`
+--
+
+INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `cantidad`, `estado`) VALUES
+(1, 1, 0, 1, 'Preparando');
 
 -- --------------------------------------------------------
 
@@ -211,7 +237,7 @@ CREATE TABLE `promos` (
 --
 
 INSERT INTO `promos` (`id_Promo`, `Nombre`, `Descripcion`, `Fecha`, `Precio`, `Estado`) VALUES
-(1, '2x1 de Chela', '2x2 en toda la cerveza nacional', '2016-11-05', 50.00, 'inactivo');
+(1, '2x1 de Chela', '2x2 en toda la cerveza nacional', '2016-11-05', 50.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -260,6 +286,15 @@ CREATE TABLE `venta` (
   `Fecha_Cierre` date DEFAULT NULL,
   `Total_Cierre` float(4,3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`id_Ven`, `id_Cue`, `Estado`, `Fecha_Apertura`, `Fecha_Cierre`, `Total_Cierre`) VALUES
+(1, 1, 'Abierta', '2016-10-30', NULL, NULL),
+(2, 2, 'Abierta', '2016-10-30', NULL, NULL),
+(3, 3, 'Abierta', '2016-10-30', NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -367,7 +402,7 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
@@ -387,12 +422,12 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `mesa`
 --
 ALTER TABLE `mesa`
-  MODIFY `id_Mesa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Mesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `platillo`
 --
@@ -407,7 +442,7 @@ ALTER TABLE `promos`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -38,6 +38,7 @@ class Login
                 $result = $result->fetch_assoc();
                 echo "<script>alertify.alert('Exito! Bienvenido  ');</script>";
                 session_start();
+                $_SESSION['id']=$result['id_Em'];
                 $_SESSION['user']=$result['nickname'];
                 $_SESSION['type']=$result['Rol'];
                 switch ($result['Rol']) {
