@@ -152,7 +152,7 @@ class orden
     {
         $this->conectar();
         $menu="";
-        $sql = "SELECT * FROM platillo";
+        $sql = "SELECT * FROM platillo WHERE Estado='activo'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -161,7 +161,7 @@ class orden
                 $menu.= '<option value="platillo-'.$row['id_Plat'].'">'.$row['nombre'].'</option>';
             }
         }
-        $sql = "SELECT * FROM combos";
+        $sql = "SELECT * FROM combos WHERE Estado='activo'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -170,7 +170,7 @@ class orden
                 $menu.= '<option value="combos-'.$row['id_Comb'].'">Combo '.$row['nombre'].'</option>';
             }
         }
-        $sql = "SELECT * FROM promos";
+        $sql = "SELECT * FROM promos WHERE Estado='activo'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -194,11 +194,24 @@ class orden
                    $sql2 = "SELECT * FROM r_pl_in WHERE id_Plat=".$id;
                    break;
                 case 'combos':
-                    $sql2 = "SELECT * FROM r_c_pl WHERE id_Comb=".$id;
+                    $sql2 = "SELECT id_Inv, r_pl_in.cant as cant1, r_c_pl.cant as cant2 FROM r_c_pl INNER JOIN r_pl_in ON r_c_pl.id_Plat=r_pl_in.id_Plat WHERE id_Comb=".$id;
                     break;
                 case 'promos':
-                    $sql2 = "SELECT * FROM r_pr_pl WHERE id_Promo=".$id;
+                    $sql2 = "SELECT id_Inv, r_pl_in.cant as cant1, r_pr_pl.cant as cant2 FROM r_pr_pl INNER JOIN r_pl_in ON r_pr_pl.id_Plat=r_pl_in.id_Plat WHERE id_Prom=".$id;
                     break;
+            }
+
+            $result2 = $this->con->query($sql2);
+            if ($result2->num_rows > 0) {
+                while($row2 = $result2->fetch_assoc()) 
+                {
+                    if($tipo=="platillo"){
+                        $sql3 = "UPDATE inventario SET cantidad=(cantidad-".($row2['cant']).")  WHERE id_Inv=".$row2['id_Inv'];
+                    }else{
+                        $sql3 = "UPDATE inventario SET cantidad=(cantidad-".($row2['cant1']*$row2['cant2']).")  WHERE id_Inv=".$row2['id_Inv'];
+                    }
+                    $result3 = $this->con->query($sql3);
+                }
             }
             echo "Exito!! Orden en espera";
         }      
@@ -333,7 +346,7 @@ class orden
     }
     //--------------- Pagar cuenta
 
-public function pagarCuenta($id_Cue,$mesa)
+    public function pagarCuenta($id_Cue,$mesa)
     {
         $this->conectar();
         $total=0;
@@ -365,7 +378,7 @@ public function pagarCuenta($id_Cue,$mesa)
             }
         }
         if($pagar>0){
-            $sql = $sql = "UPDATE cuentas SET Total=".$total.", Estatus='Pagada' WHERE id_Cue=".$id_Cue;
+            $sql = "UPDATE cuentas SET Total=".$total.", Estatus='Pagada' WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
             $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$mesa;
             $result = $this->con->query($sql);
