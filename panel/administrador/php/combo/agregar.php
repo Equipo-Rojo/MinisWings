@@ -1,54 +1,54 @@
 <style type="text/css">.thumb-image{float:right;width:100px;position:relative;padding:none;}</style>
-<h1>Editar Platillo</h1>
+<h1>Agregar combo</h1>
 <form class="pure-form pure-form-stacked">
     <fieldset>
-        <legend>Nuevo Platillo</legend>
+        <legend>Nuevo combo</legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="form-add-platillo" name="url" multiple="multiple" type="file"/> 
+            <input id="fileUpload" class="form-add-combo" name="url" multiple="multiple" type="file"/> 
             <div id="image-holder"></div>
         </div> 
 
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Nombre del platillo</label>
-                <input id="nom" class="pure-u-1-2 form-add-platillo" type="text" name="nombre" value="" required>
+                <label for="">Nombre del combo</label>
+                <input id="nom" class="pure-u-1-2 form-add-combo" type="text" name="nombre" value="" required>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Categoria</label>
-                <input id="cat" class="pure-u-1-2 form-add-platillo" type="text" name="categoria" value="" required>
+                <input id="cat" class="pure-u-1-2 form-add-combo" type="text" name="categoria" value="" required>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Precio</label>
-                <input id="pre" class="pure-u-1-2 form-add-platillo" type="number" name="precio" value="" required >
+                <input id="pre" class="pure-u-1-2 form-add-combo" type="number" name="precio" value="" required >
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Descripción</label>
-                <textarea id="des" class="pure-u-1-2 form-add-platillo" type="text" name="descripcion" value="" required ></textarea>
+                <textarea id="des" class="pure-u-1-2 form-add-combo" type="text" name="descripcion" value="" required ></textarea>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Estado</label>
-                <select id="sta" class="pure-u-1-2 form-add-platillo" name="" value="">
+                <select id="sta" class="pure-u-1-2 form-add-combo" name="" value="">
                     <option>Seleccionar...</option>
                     <option name="sta" value="inactivo">Inactivo</option>
                     <option name="sta" value="activo" >Activo</option>
                 </select>
             </div>
         </div>
-        <legend>Ingredientes</legend>
-        <div id="platillo" class="pure-g">
+        <legend>Platillos</legend>
+        <div id="combo" class="pure-g">
             <?php
-                include('../platillo.php');
-                $ing = new platillo();
-                $ing -> listarIngrediente(1);
+                include('../combo.php');
+                $ing = new combo();
+                $ing -> listarPlatillo(1);
             ?>
         </div>
-        <button id="agregar" type="button" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Ingrediente</button>
-        <button id="borrar" type="button" class="pure-button button-warning"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Ingrediente</button>
+        <button id="agregar" type="button" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Platillo</button>
+        <button id="borrar" type="button" class="pure-button button-warning"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Platillo</button>
         <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
@@ -85,67 +85,67 @@
             alertify.alert("Por favor seleccione solo imagenes.");
           }
         });
-        //---------- Boton de cancelar platillo
+        //---------- Boton de cancelar combo
         $('#cancelar').click(function(event){
             event.preventDefault();
             $.ajax({ 
                 type: "POST", 
-                url: 'modulos/menu/platillo.php',  
+                url: 'modulos/menu/combo.php',  
                 success: function(data) {
                     $("div#main").empty();
                     $("div#main").append(data);
                 }  
             });    
         });
-        //---------- Boton de agregar ingrediente
+        //---------- Boton de agregar Platillo
         $('#agregar').click(function(event){
             event.preventDefault();
             ing++;
             $.ajax({ 
                 data:{num:ing},
                 type: "POST", 
-                url: 'php/platillo/ingrediente.php',  
+                url: 'php/combo/Platillo.php',  
                 success: function(data) {
-                    $("#platillo").append(data);
+                    $("#combo").append(data);
                 }  
             });  
         });  
-        //---------- Boton de borrar ingrediente
+        //---------- Boton de borrar Platillo
         $('#borrar').click(function(event){
             event.preventDefault();
-            $("#platillo"+ing).remove();
+            $("#combo"+ing).remove();
             ing--;   
         });  
-        //---------- Boton de guardar platillo
+        //---------- Boton de guardar combo
         $('#guardar').click(function(event){
             event.preventDefault();
             var valido=1;
+            var datoscombo=[];
+            var camposcombo=[];
             var datosPlatillo=[];
             var camposPlatillo=[];
-            var datosIngrediente=[];
-            var camposIngrediente=[];
-            $( ".form-add-platillo" ).each(function(){
+            $( ".form-add-combo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
+                camposcombo.push($(this).attr('name'));
+                datoscombo.push('"'+$(this).val()+'"');
+                
+            });
+            $( ".form-add-Platillo" ).each(function(){
+                if($(this).val()=="" || $(this).val()=="Seleccionar..."){valido=0;}
                 camposPlatillo.push($(this).attr('name'));
                 datosPlatillo.push('"'+$(this).val()+'"');
                 
             });
-            $( ".form-add-ingrediente" ).each(function(){
-                if($(this).val()=="" || $(this).val()=="Seleccionar..."){valido=0;}
-                camposIngrediente.push($(this).attr('name'));
-                datosIngrediente.push('"'+$(this).val()+'"');
-                
-            });
 
             if(valido==1){
+                var datoscomboJSON = JSON.stringify(datoscombo);
+                var camposcomboJSON = JSON.stringify(camposcombo);
                 var datosPlatilloJSON = JSON.stringify(datosPlatillo);
                 var camposPlatilloJSON = JSON.stringify(camposPlatillo);
-                var datosIngredienteJSON = JSON.stringify(datosIngrediente);
-                var camposIngredienteJSON = JSON.stringify(camposIngrediente);
                 $.ajax({ 
-                    data : {datosPlatillo:datosPlatilloJSON, camposPlatillo:camposPlatilloJSON, datosIngrediente: datosIngredienteJSON, camposIngrediente: camposIngredienteJSON},
+                    data : {datoscombo:datoscomboJSON, camposcombo:camposcomboJSON, datosPlatillo: datosPlatilloJSON, camposPlatillo: camposPlatilloJSON},
                     type: "POST", 
-                    url: 'php/platillo/funcionAgregar.php',  
+                    url: 'php/combo/funcionAgregar.php',  
                     success: function(data) {
                         $.ajax({ 
                             type: "POST", 

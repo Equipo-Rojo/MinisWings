@@ -1,6 +1,6 @@
 <?php
 
-class platillo
+class combo
 {
     //Atributos globales. 
     private $host="";
@@ -27,58 +27,57 @@ class platillo
         }    
     } 
     
-    //--------------- Listar platillos
-    public function listarPlatillos()
+    //--------------- Listar combos
+    public function listarcombos()
     {
         $this->conectar();
-        $platillo="";
-        $sql = "SELECT * FROM platillo WHERE Estado='activo'";
+        $combo="";
+        $sql = "SELECT * FROM combos WHERE Estado='activo'";
         $result = $this->con->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                        $platillo .= '<tr>
+                        $combo .= '<tr>
                         <td class="highlight">'.$row['nombre'].'</td>
-                        <td class="highlight">'.$row['categoria'].'</td>
+                        <td class="highlight">'.$row['descripcion'].'</td> 
                         <td class="highlight">'.$row['precio'].'</td>
-                        <td class="highlight">'.$row['descripcion'].'</td>   
-                        <td class="highlight"><i id="'.$row['id_Plat'].'" class="fa fa-pencil-square-o edite-platillo" aria-hidden="true"></i></td>
-                        <td class="highlight"><i id="'.$row['id_Plat'].'" class="fa fa-trash delete-platillo" aria-hidden="true"></i></td> 
+                        <td class="highlight"><i id="'.$row['id_Comb'].'" class="fa fa-pencil-square-o edite-combo" aria-hidden="true"></i></td>
+                        <td class="highlight"><i id="'.$row['id_Comb'].'" class="fa fa-trash delete-combo" aria-hidden="true"></i></td> 
                         </tr>';
                 }
             }
-            echo $platillo;
+            echo $combo;
             $this->con->close();
     }
-        //--------------- Eliminar platillo
-    public function eliminarPlatillo($id)
+        //--------------- Eliminar combo
+    public function eliminarcombo($id)
     {   
         $this->conectar();
-        $sql = "UPDATE platillo SET Estado='inactivo' WHERE id_Plat='".$id."'";
+        $sql = "UPDATE combos SET Estado='inactivo' WHERE id_Comb='".$id."'";
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
             echo "Exito";
         }        
         $this->con->close();
     }
-    //--------------Listar ingredientes
-    public function listarIngrediente($num){
+    //--------------Listar Platillos
+    public function listarPlatillo($num){
         $this->conectar();
-        $ingrediente='<div id="platillo'.$num.'" class="pure-u-1 pure-u-md-1-3"><select class="pure-u-1-2 form-add-ingrediente" name="id_Inv" value=""><option>Seleccionar...</option>';
+        $Platillo='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3"><select class="pure-u-1-2 form-add-Platillo" name="id_Inv" value=""><option>Seleccionar...</option>';
 
         $sql = "SELECT * FROM inventario WHERE status='activo'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                    $ingrediente.= '<option name="id_Inv" value="'.$row['id_Inv'].'">'.$row['nombre'].'</option>';
+                    $Platillo.= '<option name="id_Inv" value="'.$row['id_Inv'].'">'.$row['nombre'].'</option>';
             }
         }
-        $ingrediente.='</select></div>';
-        echo $ingrediente;
+        $Platillo.='</select></div>';
+        echo $Platillo;
         $this->con->close();
     }
 
-    //--------------- Agregar pplatillo
-    public function agregarPlatillo($datosPlatillo, $camposPlatillo,$datosIngrediente, $camposIngrediente)
+    //--------------- Agregar pcombo
+    public function agregarcombo($datoscombo, $camposcombo,$datosPlatillo, $camposPlatillo)
     {   
         /*$sql = $sql = "INSERT INTO inventario (";
 
@@ -98,10 +97,10 @@ class platillo
         $this->conectar();
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
-            echo 'modulos/menu/platillo.php';
+            echo 'modulos/menu/combo.php';
         }      
         $this->con->close();
         */
-        echo 'modulos/menu/platillo.php';
+        echo 'modulos/menu/combo.php';
     }
 }

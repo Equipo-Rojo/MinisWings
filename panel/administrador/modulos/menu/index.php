@@ -27,11 +27,11 @@
             </li>
             
             <li class="pure-menu-item menu-item-divided">
-                <a href="platillo" class="pure-menu-link"> Promociones</a>
+                <a href="promo" class="pure-menu-link"> Promociones</a>
             </li>
 
             <li class="pure-menu-item">
-                <a href="platillo" class="pure-menu-link"> Combos</a>
+                <a href="combo" class="pure-menu-link"> Combos</a>
             </li>
 
             <li class="pure-menu-item ">

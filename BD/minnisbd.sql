@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2016 a las 05:09:35
+-- Tiempo de generación: 31-10-2016 a las 01:17:16
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -28,9 +28,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `combos` (
   `id_Comb` int(11) NOT NULL,
-  `precio` float(4,2) DEFAULT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `precio` float(10,2) DEFAULT NULL,
   `Estado` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `combos`
+--
+
+INSERT INTO `combos` (`id_Comb`, `nombre`, `descripcion`, `precio`, `Estado`) VALUES
+(1, 'Alitas y cerveza', '1 orden de alitas y 2 cervezas', 150.00, 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -115,10 +124,10 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id_Inv`, `nombre`, `medida`, `cantidad`, `minimo`, `descripcion`, `status`) VALUES
-(1, 'Alitas', 'pza', 100, 100, 'Alitas de pollo', 'activo'),
+(1, 'Alitas', 'pza', 100, 100, 'Alitas de pollo', 'inactivo'),
 (2, 'Carne', 'grs.', 5000, 1000, 'Porción de carne', 'inactivo'),
 (3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'inactivo'),
-(4, 'Cerveza Corona', 'ml', 50, 20, 'Cerveza Corona 355ml', 'activo');
+(4, 'Cerveza Corona', 'ml', 40, 20, 'Cerveza Corona 355ml', 'activo');
 
 -- --------------------------------------------------------
 
@@ -169,10 +178,18 @@ CREATE TABLE `platillo` (
   `id_Plat` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `categoria` varchar(45) DEFAULT NULL,
-  `precio` float(3,3) DEFAULT NULL,
+  `precio` float(10,2) DEFAULT NULL,
   `descripcion` varchar(50) DEFAULT NULL,
-  `Estado` varchar(25) DEFAULT NULL
+  `Estado` varchar(25) DEFAULT NULL,
+  `url` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `platillo`
+--
+
+INSERT INTO `platillo` (`id_Plat`, `nombre`, `categoria`, `precio`, `descripcion`, `Estado`, `url`) VALUES
+(1, 'Orden de alitas', 'Wings', 50.20, '5 pzas de alitas bañadas en salsa de mando', 'activo', '');
 
 -- --------------------------------------------------------
 
@@ -183,6 +200,7 @@ CREATE TABLE `platillo` (
 CREATE TABLE `promos` (
   `id_Promo` int(11) NOT NULL,
   `Nombre` varchar(25) NOT NULL,
+  `Descripcion` varchar(50) NOT NULL,
   `Fecha` date DEFAULT NULL,
   `Precio` float(10,2) DEFAULT NULL,
   `Estado` varchar(25) DEFAULT NULL
@@ -192,8 +210,8 @@ CREATE TABLE `promos` (
 -- Volcado de datos para la tabla `promos`
 --
 
-INSERT INTO `promos` (`id_Promo`, `Nombre`, `Fecha`, `Precio`, `Estado`) VALUES
-(1, '2x1 de Chela', '2016-11-05', 50.00, 'activo');
+INSERT INTO `promos` (`id_Promo`, `Nombre`, `Descripcion`, `Fecha`, `Precio`, `Estado`) VALUES
+(1, '2x1 de Chela', '2x2 en toda la cerveza nacional', '2016-11-05', 50.00, 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -339,7 +357,7 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `combos`
 --
 ALTER TABLE `combos`
-  MODIFY `id_Comb` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Comb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `contactos`
 --
@@ -379,7 +397,7 @@ ALTER TABLE `orden`
 -- AUTO_INCREMENT de la tabla `platillo`
 --
 ALTER TABLE `platillo`
-  MODIFY `id_Plat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Plat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `promos`
 --
