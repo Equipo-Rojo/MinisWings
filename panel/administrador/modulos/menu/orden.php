@@ -22,7 +22,7 @@
             }  
         });  
     });
-     $('.add-orden').click(function(event){
+    $('.add-orden').click(function(event){
         
         var id_cue=$(this).attr('id');
 
@@ -46,5 +46,19 @@
                 $("div#main").append(data);
             }  
         }); */ 
+    });
+    $('.edite-cuenta').click(function(event){
+        
+        var id_cue=$(this).attr('id');
+
+        $.ajax({
+            data:{id_Cue:id_cue}, 
+            type: "POST", 
+            url: 'php/ordenes/editar-cuenta.php',  
+            success: function(data) {  
+                $("div#main").empty();
+                $("div#main").append(data);
+            }  
+        });  
     });   
 </script>
