@@ -1,4 +1,4 @@
-<div class="orden1">
+
     <h1>Ordenes</h1>
     <div class="table-responsive">
         <table class="pure-table pure-table-horizontal">
@@ -21,4 +21,3 @@
             </tbody>
         </table>
     </div>
-</div>

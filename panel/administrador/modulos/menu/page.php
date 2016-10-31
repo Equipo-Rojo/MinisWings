@@ -6,16 +6,18 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Fecha</th>
+                    <th>Descripcion</th>
                     <th>Precio</th>
-                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Editar</th>
+                    <th>Elimiar</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                     include('../../php/promo.php');
                     $pla = new promo();
-                    $pla -> listarPromo();
+                    $pla -> listarpromos();
                 ?>
             </tbody>
         </table>

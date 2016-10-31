@@ -8,7 +8,7 @@ class contacto
     private $host="";
     private $user="";
     private $pw="";
-    private $db="";
+    private $db="minnisdb";
     private $con;
     
     public function __construct() {

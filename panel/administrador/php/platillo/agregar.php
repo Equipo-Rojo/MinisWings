@@ -5,7 +5,7 @@
         <legend>Nuevo Platillo</legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="form-add-platillo" name="url" multiple="multiple" type="file"/> 
+            <input id="fileUpload" class="form-add-platillo button-secondary pure-button" name="url" multiple="multiple" type="file"/> 
             <div id="image-holder"></div>
         </div> 
 
