@@ -28,7 +28,7 @@
     $('.delete-inventario').click(function(event){
 
         var id=$(this).attr('id');
-        alert("Eliminado");
+        alertify.alert("Eliminado");
         $.ajax({ 
             data : {id:id},
             type: "POST", 

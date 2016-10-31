@@ -36,7 +36,7 @@ class Login
         $result = $this->con->query($sql);
             if ($result->num_rows > 0) {
                 $result = $result->fetch_assoc();
-                echo "<script>alert('Exito! Bienvenido  ');</script>";
+                echo "<script>alertify.alert('Exito! Bienvenido  ');</script>";
                 session_start();
                 $_SESSION['user']=$result['nickname'];
                 $_SESSION['type']=$result['Rol'];
@@ -56,7 +56,7 @@ class Login
                 }
             }
             else {
-                 echo "<script>alert('Verifica los datos');</script>";
+                 echo "<script>alertify.alert('Verifica los datos');</script>";
             }
             $this->con->close();
     }   
