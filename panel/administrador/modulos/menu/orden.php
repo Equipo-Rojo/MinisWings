@@ -11,7 +11,7 @@
     </div>
 </div>
 <script type="text/javascript">
-     //---------- Boton de agregar producto al platillo
+     //---------- Boton de agregar cuenta
     $('.add-cuenta').click(function(event){
         $.ajax({ 
             type: "POST", 
@@ -22,6 +22,7 @@
             }  
         });  
     });
+    //---------- Boton de agregar orden
     $('.add-orden').click(function(event){
         
         var id_cue=$(this).attr('id');
@@ -36,17 +37,20 @@
             }  
         });  
     });
-     $('.pay-cuenta').click(function(event){
-        alertify.alert("click pagar");
-       /* $.ajax({ 
+    //---------- Boton de pagar cuenta
+    $('.pay-cuenta').click(function(event){
+        var id_cue=$(this).attr('id');
+        $.ajax({ 
+            data:{id_Cue:id_cue}, 
             type: "POST", 
-            url: 'php/ordenes/add-cuenta.php',  
+            url: 'php/ordenes/pay-cuenta.php',  
             success: function(data) {  
                 $("div#main").empty();
                 $("div#main").append(data);
             }  
-        }); */ 
+        }); 
     });
+    //---------- Boton de editar cuenta
     $('.edite-cuenta').click(function(event){
         
         var id_cue=$(this).attr('id');

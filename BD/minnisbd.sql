@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2016 a las 06:46:31
+-- Tiempo de generación: 31-10-2016 a las 15:57:03
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -39,7 +39,7 @@ CREATE TABLE `combos` (
 --
 
 INSERT INTO `combos` (`id_Comb`, `nombre`, `descripcion`, `precio`, `Estado`) VALUES
-(1, 'Alitas y cerveza', '1 orden de alitas y 2 cervezas', 150.00, 'activo');
+(1, 'Alitas y cerveza', '1 orden de alitas y 1 cervezas', 90.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -82,10 +82,7 @@ CREATE TABLE `cuentas` (
 --
 
 INSERT INTO `cuentas` (`id_Cue`, `Estatus`, `NumMesa`, `id_Em`, `Total`) VALUES
-(1, 'abierta', '1', 1, NULL),
-(2, 'abierta', '2', 1, NULL),
-(3, 'abierta', '3', 2, NULL),
-(7, 'Abierta', '4', 1, NULL);
+(1, 'Cortesia', '1', 1, 90.00);
 
 -- --------------------------------------------------------
 
@@ -169,14 +166,14 @@ CREATE TABLE `mesa` (
 --
 
 INSERT INTO `mesa` (`id_Mesa`, `NumMesa`, `Estatus`) VALUES
-(1, '1', 'Ocupada'),
-(2, '2', 'Ocupada'),
-(3, '3', 'Ocupada'),
-(4, '4', 'Ocupada'),
+(1, '1', 'Libre'),
+(2, '2', 'Libre'),
+(3, '3', 'Libre'),
+(4, '4', 'Libre'),
 (5, '5', 'Libre'),
 (6, '6', 'Libre'),
 (7, '8', 'Libre'),
-(8, '7', 'Libre');
+(8, '7', 'Ocupada');
 
 -- --------------------------------------------------------
 
@@ -198,12 +195,7 @@ CREATE TABLE `orden` (
 --
 
 INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `tipo`, `cantidad`, `estado`) VALUES
-(1, 1, 1, 'platillo', 1, 'Preparando'),
-(2, 1, 1, 'combos', 1, 'Pedido'),
-(3, 2, 1, 'promos', 1, 'Preparando'),
-(4, 7, 1, 'platillo', 1, 'Pedido'),
-(5, 7, 1, 'platillo', 2, 'Pedido'),
-(6, 7, 1, 'platillo', 1, 'Pedido');
+(1, 1, 1, 'combos', 1, 'Servido');
 
 -- --------------------------------------------------------
 
@@ -248,7 +240,7 @@ CREATE TABLE `promos` (
 --
 
 INSERT INTO `promos` (`id_Promo`, `nombre`, `Descripcion`, `Fecha`, `precio`, `Estado`) VALUES
-(1, '2x1 de Chela', '2x2 en toda la cerveza nacional', '2016-11-05', 50.00, 'activo');
+(1, '2x1 de Chela', '2x2 en toda la cerveza nacional', '2016-11-05', 50.00, 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -261,6 +253,13 @@ CREATE TABLE `r_c_pl` (
   `id_Plat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `r_c_pl`
+--
+
+INSERT INTO `r_c_pl` (`id_Comb`, `id_Plat`) VALUES
+(1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -271,6 +270,13 @@ CREATE TABLE `r_pl_in` (
   `id_Inv` int(11) NOT NULL,
   `id_Plat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `r_pl_in`
+--
+
+INSERT INTO `r_pl_in` (`id_Inv`, `id_Plat`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -295,7 +301,7 @@ CREATE TABLE `venta` (
   `Estado` varchar(25) DEFAULT NULL,
   `Fecha_Apertura` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Fecha_Cierre` date DEFAULT NULL,
-  `Total_Cierre` float(4,3) DEFAULT NULL
+  `Total_Cierre` float(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -303,10 +309,7 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`id_Ven`, `id_Cue`, `Estado`, `Fecha_Apertura`, `Fecha_Cierre`, `Total_Cierre`) VALUES
-(1, 1, 'Abierta', '2016-10-30 05:00:00', NULL, NULL),
-(2, 2, 'Abierta', '2016-10-30 05:00:00', NULL, NULL),
-(3, 3, 'Abierta', '2016-10-30 05:00:00', NULL, NULL),
-(7, 7, 'Abiert', '2016-10-31 04:11:06', NULL, NULL);
+(1, 1, 'Abierta', '2016-10-31 14:53:35', '2016-10-31', 90.00);
 
 --
 -- Índices para tablas volcadas
@@ -414,7 +417,7 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
@@ -439,7 +442,7 @@ ALTER TABLE `mesa`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `platillo`
 --
@@ -454,7 +457,7 @@ ALTER TABLE `promos`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
