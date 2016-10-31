@@ -108,7 +108,7 @@
             type: "POST", 
             url: 'php/empleado/reset.php',  
             success: function(data) { 
-                 alertify.myAlert("reset");
+                alertify.alert("Se reinició la contraseña");
                 $.ajax({ 
                 type: "POST", 
                 url: 'modulos/menu/empleados.php',  

@@ -44,7 +44,7 @@ class Login
                     case 'Administrador':
                         header('Location: panel/administrador/');                
                         break;
-                    case 'Cosinero':
+                    case 'Cocinero':
                         header('Location: panel/cocinero/');
                         break;
                     case 'Barman':
