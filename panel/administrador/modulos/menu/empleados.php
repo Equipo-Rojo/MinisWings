@@ -8,6 +8,7 @@
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Roll</th>
+                <th>Estado</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>

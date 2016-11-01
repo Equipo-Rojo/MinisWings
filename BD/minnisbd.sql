@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2016 a las 05:05:27
+-- Tiempo de generación: 01-11-2016 a las 06:57:33
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -66,6 +66,28 @@ INSERT INTO `contactos` (`id`, `nombre`, `direccion`, `facebook`, `telefono`, `c
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `corte`
+--
+
+CREATE TABLE `corte` (
+  `id_Cort` int(11) NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Subtotal` float(100,2) NOT NULL,
+  `Cortesias` float(100,2) NOT NULL,
+  `Total` float(100,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `corte`
+--
+
+INSERT INTO `corte` (`id_Cort`, `Fecha`, `Subtotal`, `Cortesias`, `Total`) VALUES
+(1, '2016-11-01 05:32:43', 1000.00, 0.00, 1000.00),
+(2, '2016-11-01 05:51:49', 2000.00, 1000.00, 1000.00);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cuentas`
 --
 
@@ -83,7 +105,7 @@ CREATE TABLE `cuentas` (
 
 INSERT INTO `cuentas` (`id_Cue`, `Estatus`, `NumMesa`, `id_Em`, `Total`) VALUES
 (1, 'Pagada', '1', 1, 30.00),
-(2, 'Abierta', '2', 1, NULL),
+(2, 'Pagada', '2', 1, 50.00),
 (3, 'Cortesia', '6', 1, 90.00);
 
 -- --------------------------------------------------------
@@ -133,11 +155,11 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id_Inv`, `nombre`, `medida`, `cantidad`, `minimo`, `descripcion`, `status`) VALUES
-(1, 'Alitas', 'pza', 25, 100, 'Alitas de pollo', 'activo'),
+(1, 'Alitas', 'pza', 20, 100, 'Alitas de pollo', 'activo'),
 (2, 'Carne', 'grs.', 5000, 1000, 'Porción de carne', 'inactivo'),
 (3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'inactivo'),
 (4, 'Cerveza Corona', 'ml', 40, 20, 'Cerveza Corona 355ml', 'inactivo'),
-(5, 'Cerveza Victoria', 'ml.', 86, 50, 'Cerveza Victoria de vidrio 355ml.', 'activo');
+(5, 'Cerveza Victoria', 'ml.', 84, 50, 'Cerveza Victoria de vidrio 355ml.', 'activo');
 
 -- --------------------------------------------------------
 
@@ -170,7 +192,7 @@ CREATE TABLE `mesa` (
 
 INSERT INTO `mesa` (`id_Mesa`, `NumMesa`, `Estatus`) VALUES
 (1, '1', 'Libre'),
-(2, '2', 'Ocupada'),
+(2, '2', 'Libre'),
 (3, '3', 'Libre'),
 (4, '4', 'Libre'),
 (5, '5', 'Libre'),
@@ -199,7 +221,8 @@ CREATE TABLE `orden` (
 
 INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `tipo`, `cantidad`, `estado`) VALUES
 (1, 1, 2, 'platillo', 1, 'Servido'),
-(2, 3, 2, 'platillo', 3, 'Servido');
+(2, 3, 2, 'platillo', 3, 'Servido'),
+(3, 2, 1, 'promos', 1, 'Servido');
 
 -- --------------------------------------------------------
 
@@ -245,7 +268,7 @@ CREATE TABLE `promos` (
 --
 
 INSERT INTO `promos` (`id_Promo`, `nombre`, `Descripcion`, `Fecha`, `precio`, `Estado`) VALUES
-(1, 'Alitas y cerveza', '1 Orden de alitas con 2 cervezas', '2016-11-05', 50.00, 'inactivo');
+(1, 'Alitas y cerveza', '1 Orden de alitas con 2 cervezas', '2016-11-05', 50.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -328,7 +351,7 @@ CREATE TABLE `venta` (
 
 INSERT INTO `venta` (`id_Ven`, `id_Cue`, `Estado`, `Fecha_Apertura`, `Fecha_Cierre`, `Total_Cierre`) VALUES
 (1, 1, 'Cerrada', '2016-10-31 22:29:24', '2016-10-31', 30.00),
-(2, 2, 'Abierta', '2016-11-01 00:29:30', NULL, NULL),
+(2, 2, 'Cerrada', '2016-11-01 00:29:30', '2016-11-01', 50.00),
 (3, 3, 'Cortesia', '2016-11-01 02:30:11', '2016-10-31', 90.00);
 
 --
@@ -346,6 +369,12 @@ ALTER TABLE `combos`
 --
 ALTER TABLE `contactos`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `corte`
+--
+ALTER TABLE `corte`
+  ADD PRIMARY KEY (`id_Cort`);
 
 --
 -- Indices de la tabla `cuentas`
@@ -434,6 +463,11 @@ ALTER TABLE `combos`
 ALTER TABLE `contactos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `corte`
+--
+ALTER TABLE `corte`
+  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
@@ -462,7 +496,7 @@ ALTER TABLE `mesa`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `platillo`
 --

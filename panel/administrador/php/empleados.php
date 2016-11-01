@@ -32,16 +32,17 @@ class empleado
     {
         $this->conectar();
         $empleado="";
-        $sql = "SELECT * FROM empleado WHERE Estado='activo' AND Rol NOT LIKE 'Administrador'";
+        $sql = "SELECT * FROM empleado WHERE Rol NOT LIKE 'Administrador'";
         $result = $this->con->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                         $empleado .= '<tr>
-                        <td class="highlight">'.$row['Nombre'].'</td>
-                        <td class="highlight">'.$row['Apellido'].'</td>
-                        <td class="highlight">'.$row['Rol'].'</td>
-                        <td class="highlight"><i id="'.$row['id_Em'].'" class="fa fa-pencil-square-o edite-empleado" aria-hidden="true"></i></td>
-                        <td class="highlight"><i id="'.$row['id_Em'].'" class="fa fa-trash delete-empleado" aria-hidden="true"></i></td>
+                        <td class="">'.$row['Nombre'].'</td>
+                        <td class="">'.$row['Apellido'].'</td>
+                        <td class="">'.$row['Rol'].'</td>
+                        <td class="">'.$row['Estado'].'</td>
+                        <td class=""><i id="'.$row['id_Em'].'" class="fa fa-pencil-square-o edite-empleado" aria-hidden="true"></i></td>
+                        <td class=""><i id="'.$row['id_Em'].'" class="fa fa-trash delete-empleado" aria-hidden="true"></i></td>
                         </tr>';
                 }
             }
