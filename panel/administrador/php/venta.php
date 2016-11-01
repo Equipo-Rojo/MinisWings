@@ -28,15 +28,30 @@ class venta
     //--------------- Listar venta 
     public function listarVenta()
     {
-       // date_default_timezone_set('America/mexico_city'); 
-        $dia=date("Y-m-d");
-        $hora=date("H:i:s");
-        if($hora>'18:00:00'){
-            $dia=$dia.' 16:00:00';
-        }else{
-            $dia=date('Y-m-d',strtotime ( '-1 day' , strtotime ( $dia ) ) )+' 16:00:00';     
-            echo $dia;
+        date_default_timezone_set('America/mexico_city'); 
+        $hora_real=date("H:i:s");
+
+        $hrs = "16";
+        $min = "00";
+        $hora_base = date("H:i:s",mktime($hrs,$min,0));
+
+        if($hora_real>$hora_base){ //si pasa de las 4 pm
+            $hoy = date('Y-m-d');
+            $d=date('d', strtotime($hoy));
+            $m=date('m', strtotime($hoy));
+            $y=date('Y', strtotime($hoy));
+            $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
         }
+        else{
+            $hoy = date('Y-m-d');
+            $ayer = strtotime ('-1 day' , strtotime($hoy)) ;
+            $ayer = date ('Y-m-d', $ayer);
+            $d=date('d', strtotime($ayer));
+            $m=date('m', strtotime($ayer));
+            $y=date('Y', strtotime($ayer));
+            $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
+        }
+        echo '<br/>';
         $this->conectar();
         $producto="";
         $sql = "SELECT * FROM venta WHERE Fecha_Apertura>'".$dia."'";

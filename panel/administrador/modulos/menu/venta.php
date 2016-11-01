@@ -1,4 +1,4 @@
-<h1>Ventas</h1>
+<h1>Ventas del dia</h1>
 <button class="button-xlarge button-secondary pure-button add-promo"><i class="fa fa-plus" aria-hidden="true"></i> Corte de caja    </button>
 <div class="table-responsive">
     <table class="mq-table pure-table-bordered pure-table">
