@@ -76,7 +76,7 @@ class combo
         $this->con->close();
     }
 
-    //--------------- Agregar pcombo
+    //--------------- Agregar combo
     public function agregarcombo($datoscombo, $camposcombo,$datosPlatillo, $camposPlatillo)
     {   
         /*$sql = $sql = "INSERT INTO inventario (";

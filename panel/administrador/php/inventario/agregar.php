@@ -89,7 +89,7 @@
             });  
         }
         else{
-            alert("Faltan campos");
+            alertify.alert("Faltan campos");
         }
     }); 
      
