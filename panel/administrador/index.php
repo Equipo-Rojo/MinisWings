@@ -1,10 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['user'])){
-	if($_SESSION['type']!="barman")
-	 header('Location: ../');   
-}else{
-?>
+if(isset($_SESSION['user'])){
+	if ($_SESSION['type']=='Administrador') {
+		?>
 <!doctype html>
 <html lang="en">
 	<?php include('modulos/head.php'); ?>
@@ -28,5 +26,28 @@ if(!isset($_SESSION['user'])){
     	<script src="../../js/menu.js"></script>
 	</body>
 </html>
-<?php }
+
+
+
+
+<?php
+
+
+	}
+	else {
+	header('Location:../../index.php');
+}
+	
+}
+
+
 ?>
+
+
+
+
+
+
+
+
+

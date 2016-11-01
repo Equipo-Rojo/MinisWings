@@ -1,10 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['user'])){
-	if($_SESSION['type']!="Cocinero")
-	 header('Location: ../');   
-}else{
-?>
+if(isset($_SESSION['user'])){
+	if ($_SESSION['type']=='Cocinero') {
+		?>
 <!doctype html>
 <html lang="en">
 	<?php include('modulos/head.php'); ?>
@@ -14,8 +12,12 @@ if(!isset($_SESSION['user'])){
 		<?php include('modulos/menu/index.php'); ?>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		</div>
+		     <div class="General">
         <div id="main" class="content">
-			<?php include('modulos/menu/home.php'); ?>
+
+     	<?php include('modulos/menu/home.php'); ?>
+     </div>
+			
 	    </div>
 	    <!-- ZONA DE SCRIPTS -->
 	    <script src="../../js/alertify.min.js"></script>
@@ -24,5 +26,19 @@ if(!isset($_SESSION['user'])){
     	<script src="../../js/menu.js"></script>
 	</body>
 </html>
-<?php }
+
+
+
+
+<?php
+
+
+	}
+	else {
+	header('Location:../../index.php');
+}
+	
+}
+
+
 ?>
