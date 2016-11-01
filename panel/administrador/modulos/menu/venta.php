@@ -30,8 +30,7 @@
     $con = new Conexion('datosServer.php');
     $con = $con->conectar();
 
-   //$sql = "SELECT * FROM corte WHERE Fecha>'".$dia."'";
-   $sql = "SELECT * FROM corte WHERE Fecha<'".$dia."'";
+    $sql = "SELECT * FROM corte WHERE Fecha>'".$dia."'";
     $result = $con->query($sql);
     if ($result->num_rows == 0) {
         echo '<button class="button-xlarge button-secondary pure-button corte"><i class="fa fa-times" aria-hidden="true"></i> Corte de caja</button>';
