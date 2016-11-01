@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2016 a las 06:57:33
+-- Tiempo de generación: 01-11-2016 a las 17:31:55
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -82,8 +82,7 @@ CREATE TABLE `corte` (
 --
 
 INSERT INTO `corte` (`id_Cort`, `Fecha`, `Subtotal`, `Cortesias`, `Total`) VALUES
-(1, '2016-11-01 05:32:43', 1000.00, 0.00, 1000.00),
-(2, '2016-11-01 05:51:49', 2000.00, 1000.00, 1000.00);
+(9, '2016-11-01 16:30:28', 170.00, 90.00, 80.00);
 
 -- --------------------------------------------------------
 
@@ -466,7 +465,7 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `corte`
 --
 ALTER TABLE `corte`
-  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `cuentas`
 --

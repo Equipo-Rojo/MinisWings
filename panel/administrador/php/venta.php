@@ -164,6 +164,55 @@ class venta
  
         echo $total;
     }
+     //--------------- registrar corte de caja
+    public function corteCaja()
+    {
+        //----------------Estimar totales de venta del dia ---------------
+        date_default_timezone_set('America/mexico_city'); 
+        $hora_real=date("H:i:s");
+
+        $hrs = "16";
+        $min = "00";
+        $hora_base = date("H:i:s",mktime($hrs,$min,0));
+
+        if($hora_real>$hora_base){ //si pasa de las 4 pm
+            $hoy = date('Y-m-d');
+            $d=date('d', strtotime($hoy));
+            $m=date('m', strtotime($hoy));
+            $y=date('Y', strtotime($hoy));
+            $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
+        }
+        else{
+            $hoy = date('Y-m-d');
+            $ayer = strtotime ('-1 day' , strtotime($hoy)) ;
+            $ayer = date ('Y-m-d', $ayer);
+            $d=date('d', strtotime($ayer));
+            $m=date('m', strtotime($ayer));
+            $y=date('Y', strtotime($ayer));
+            $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
+        }
+        $this->conectar();
+    
+        $sql = "SELECT * FROM venta WHERE Fecha_Apertura>'".$dia."'";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $this->subtotal+=$row['Total_Cierre'];
+                if($row['Estado']=="Cortesia"){
+                    $this->cortesias+=$row['Total_Cierre'];
+                }
+                $this->total=$this->subtotal-$this->cortesias;
+            }
+        }
+        //----------------Registrar totales de venta del dia ---------------
+        $sql = "INSERT INTO corte (Subtotal, Cortesias, Total) VALUES (".$this->subtotal.",".$this->cortesias.",".$this->total.")";
+
+        $result = $this->con->query($sql);
+        if($this->con->affected_rows){
+            echo "php/venta/reporte.php";
+        }
+        $this->con->close();
+    }
 }
 
  
