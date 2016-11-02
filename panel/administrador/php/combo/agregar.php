@@ -5,7 +5,7 @@
         <legend>Nuevo combo</legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="form-add-combo" name="url" multiple="multiple" type="file"/> 
+            <input id="fileUpload" class="" name="url" multiple="multiple" type="file"/> 
             <div id="image-holder"></div>
         </div> 
 
@@ -13,11 +13,6 @@
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Nombre del combo</label>
                 <input id="nom" class="pure-u-1-2 form-add-combo" type="text" name="nombre" value="" required>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Categoria</label>
-                <input id="cat" class="pure-u-1-2 form-add-combo" type="text" name="categoria" value="" required>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
@@ -32,10 +27,10 @@
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Estado</label>
-                <select id="sta" class="pure-u-1-2 form-add-combo" name="" value="">
+                <select id="Estado" class="pure-u-1-2 form-add-combo" name="Estado" value="">
                     <option>Seleccionar...</option>
-                    <option name="sta" value="inactivo">Inactivo</option>
-                    <option name="sta" value="activo" >Activo</option>
+                    <option name="Estado" value="inactivo">Inactivo</option>
+                    <option name="Estado" value="activo" >Activo</option>
                 </select>
             </div>
         </div>
@@ -47,8 +42,8 @@
                 $ing -> listarPlatillo(1);
             ?>
         </div>
-        <button id="agregar" type="button" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Platillo</button>
-        <button id="borrar" type="button" class="pure-button button-warning"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Platillo</button>
+        <button id="agregar" type="button" class="pure-button "><i class="fa fa-plus" aria-hidden="true"></i> Agregar Platillo</button>
+        <button id="borrar" type="button" class="pure-button button-secondary"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Platillo</button>
         <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
@@ -142,11 +137,13 @@
                 var camposcomboJSON = JSON.stringify(camposcombo);
                 var datosPlatilloJSON = JSON.stringify(datosPlatillo);
                 var camposPlatilloJSON = JSON.stringify(camposPlatillo);
+                var url=$('#fileUpload').val();
                 $.ajax({ 
-                    data : {datoscombo:datoscomboJSON, camposcombo:camposcomboJSON, datosPlatillo: datosPlatilloJSON, camposPlatillo: camposPlatilloJSON},
+                    data : {url:url,datosCombo:datoscomboJSON, camposCombo:camposcomboJSON, datosPlatillo: datosPlatilloJSON, camposPlatillo: camposPlatilloJSON},
                     type: "POST", 
                     url: 'php/combo/funcionAgregar.php',  
                     success: function(data) {
+                        alertify.alert(data);
                         $.ajax({ 
                             type: "POST", 
                             url: data,  

@@ -62,45 +62,59 @@ class combo
     //--------------Listar Platillos
     public function listarPlatillo($num){
         $this->conectar();
-        $Platillo='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3"><select class="pure-u-1-2 form-add-Platillo" name="id_Inv" value=""><option>Seleccionar...</option>';
+        $Platillo='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3">
+        <select class="pure-u-1-2 form-add-Platillo" name="id_Inv" value=""><option>Seleccionar...</option>';
 
-        $sql = "SELECT * FROM inventario WHERE status='activo'";
+        $sql = "SELECT * FROM platillo WHERE Estado='activo'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                    $Platillo.= '<option name="id_Inv" value="'.$row['id_Inv'].'">'.$row['nombre'].'</option>';
+                    $Platillo.= '<option name="id_Plat" value="'.$row['id_Plat'].'">'.$row['nombre'].'</option>';
             }
         }
-        $Platillo.='</select></div>';
+        $Platillo.='</select>
+        <input class="pure-u-1-2" /></div>';
         echo $Platillo;
         $this->con->close();
     }
 
     //--------------- Agregar combo
-    public function agregarcombo($datoscombo, $camposcombo,$datosPlatillo, $camposPlatillo)
+    public function agregarcombo($datoscombo, $camposcombo,$datosPlatillo, $camposPlatillo, $url_temp)
     {   
-        /*$sql = $sql = "INSERT INTO inventario (";
-
-        foreach($campos as $campo)
-        {
-            $sql.=$campo.',';
-        }
+        //-----Construccion de sentencia para combo
+        $sql = "INSERT INTO combos (";
+        foreach($camposcombo as $campo)
+        {   $sql.=$campo.',';   }
         $sql=substr($sql, 0, -1);
         $sql.=') VALUES(';
-        foreach($datos as $dato)
-        {
-            $sql.=$dato.',';
-        }
+        foreach($datoscombo as $dato)
+        {   $sql.=$dato.',';    }
         $sql=substr($sql, 0, -1);
         $sql.=');';
-
         $this->conectar();
         $result = $this->con->query($sql);
+
+        //-----Construcción de sentencia para platillos
         if($this->con->affected_rows){
-            echo 'modulos/menu/combo.php';
+           
+            $sql = "INSERT INTO r_c_pl (";
+
+            foreach($camposPlatillo as $campo)
+            {
+                $sql.=$campo.',';
+            }
+            $sql=substr($sql, 0, -1);
+            $sql.=') VALUES(';
+            foreach($datosPlatillo as $dato)
+            {
+                $sql.=$dato.',';
+            }
+            $sql=substr($sql, 0, -1);
+            $sql.=');';
         }      
+        //----------------------------------------
         $this->con->close();
-        */
-        echo 'modulos/menu/combo.php';
+        
+        
     }
 }
