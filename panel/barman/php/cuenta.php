@@ -40,7 +40,7 @@ class orden
             {
                 $cuenta.= '
                 <fieldset>
-                    <legend>Mesa '.$row['NumMesa'].'</legend>
+                    <legend> '.$row['NumMesa'].'</legend>
                     <button id="'.$row['id_Cue'].'" class="add-orden button-xlarge button-warning pure-button"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Orden</button>
                     <button id="'.$row['id_Cue'].'" class="edite-cuenta pure-button button-secondary"><i class="fa ffa-pencil" aria-hidden="true"></i> Editar cuenta</button>
                     <button id="'.$row['id_Cue'].'" class="pay-cuenta pure-button button-error"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Pagar cuenta</button>
@@ -112,7 +112,7 @@ class orden
         {
             while($row = $result->fetch_assoc()) 
             {
-                $mesa.= '<option name="mesa" value="'.$row['id_Mesa'].'">'.$row['NumMesa'].'</option>';
+                $mesa.= '<option name="mesa" value="'.$row['NumMesa'].'">'.$row['NumMesa'].'</option>';
             
             }
         }
@@ -126,7 +126,7 @@ class orden
         $this->conectar();
         session_start();
         $id=$_SESSION['id'];
-        $sql = "INSERT INTO cuentas (Estatus, NumMesa, id_Em) VALUES('".$status."','".$mesa."',".$id.")";
+        $sql = "INSERT INTO cuentas (Estatus, NumMesa, id_Em) VALUES('Abierta','".$mesa."',".$id.")";
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
             $sql = "SELECT max(id_Cue) as id_Cue FROM cuentas";
@@ -152,7 +152,8 @@ class orden
     {
         $this->conectar();
         $menu="";
-        $sql = "SELECT * FROM platillo WHERE Estado='activo'";
+        //--------------------------------------------------------------------------------------------------------------------------------------
+        $sql = "SELECT * FROM platillo INNER JOIN r_pl_in ON r_pl_in.id_Plat=platillo.id_Plat INNER JOIN inventario ON inventario.id_Inv=r_pl_in.id_Inv WHERE inventario.cantidad>5 GROUP BY platillo.id_Plat";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -161,7 +162,8 @@ class orden
                 $menu.= '<option value="platillo-'.$row['id_Plat'].'">'.$row['nombre'].'</option>';
             }
         }
-        $sql = "SELECT * FROM combos WHERE Estado='activo'";
+        //--------------------------------------------------------------------------------------------------------------------------------------
+        $sql = "SELECT * FROM combos INNER JOIN r_c_pl ON r_c_pl.id_Comb=combos.id_Comb INNER JOIN r_pl_in ON r_pl_in.id_Plat=r_c_pl.id_Plat INNER JOIN inventario ON inventario.id_Inv=r_pl_in.id_Inv WHERE inventario.cantidad>5 GROUP BY combos.id_Comb";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -170,7 +172,9 @@ class orden
                 $menu.= '<option value="combos-'.$row['id_Comb'].'">Combo '.$row['nombre'].'</option>';
             }
         }
-        $sql = "SELECT * FROM promos WHERE Estado='activo'";
+        //--------------------------------------------------------------------------------------------------------------------------------------
+        date_default_timezone_set('America/mexico_city'); 
+        $sql = "SELECT * FROM `promos`INNER JOIN r_pr_pl ON r_pr_pl.id_Prom=promos.id_Promo INNER JOIN r_pl_in ON r_pl_in.id_Plat=r_pr_pl.id_Plat INNER JOIN inventario ON inventario.id_Inv=r_pl_in.id_Inv WHERE inventario.cantidad>5 AND promos.Fecha='".date("Y-m-d")."' GROUP BY promos.id_Promo";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) 
         {
@@ -179,15 +183,16 @@ class orden
                 $menu.= '<option  value="promos-'.$row['id_Promo'].'">Promoción  '.$row['nombre'].'</option>';
             }
         }
-    
+        //--------------------------------------------------------------------------------------------------------------------------------------
         echo $menu;
         $this->con->close();
     }
-    public function nuevaOdren($id_Cue, $id, $tipo, $cantidad){
+    public function nuevaOdren($id_Cue, $id, $tipo, $cantidad, $comentarios)
+    {
         $this->conectar();
-        $sql = "INSERT INTO orden (id_Cue, id_Menu, tipo, cantidad,estado) VALUES(".$id_Cue.",".$id.",'".$tipo."',".$cantidad.",'Pedido')";
+        $sql = "INSERT INTO orden (id_Cue, id_Menu, tipo, cantidad,comentarios, estado) VALUES(".$id_Cue.",".$id.",'".$tipo."',".$cantidad.",'".$comentarios."','Recibido')";
         $result = $this->con->query($sql);
-  
+
         if($this->con->affected_rows){
             switch($tipo){
                 case 'platillo':                                    
@@ -216,7 +221,6 @@ class orden
             echo "Exito!! Orden en espera";
         }      
         $this->con->close();
-
     }
     //--------------- Listar cuentas
     public function listarOrdenes($id_Cue)
@@ -262,10 +266,10 @@ class orden
                         <td>$ '.number_format($row2['precio'],2).'</td>
                         <td>
                             <select id="orden" class="pure-u-1-2 form-edite" name="orden" value="">
-                                <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Pedido'){$orden.=" selected ";} $orden.='>Pedido</option>
+                                <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Recibido'){$orden.=" selected ";} $orden.='>Recibido</option>
                                 <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Preparando'){$orden.=" selected ";} $orden.='>Preparando</option>
                                 <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Listo'){$orden.=" selected ";} $orden.='>Listo</option>
-                                <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Servido'){$orden.=" selected ";} $orden.='>Servido</option>
+                                <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Completo'){$orden.=" selected ";} $orden.='>Completo</option>
                                 <option name="'.$row1['id_Ord'].'" ';if($row1['estado']=='Cancelado'){$orden.=" selected ";} $orden.='>Cancelado</option>
                             </select>
                         </td>
@@ -370,7 +374,10 @@ class orden
                 $result2 = $this->con->query($sql2);
                 if ($result2->num_rows > 0) {
                     $row2 = $result2->fetch_assoc();
-                    $total+=($row1['cantidad']*$row2['precio']);
+                   
+                    if($row1['estado']!="Cancelado"){
+                         $total+=($row1['cantidad']*$row2['precio']);
+                    }
                     if($row1['estado']!="Servido" && $row1['estado']!="Cancelado"){
                         $pagar=0;
                     }

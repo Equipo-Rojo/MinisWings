@@ -8,7 +8,7 @@ include('../conexion.php');
     $result = $con->query($sql);
     $cuenta = $result->fetch_assoc();
 ?>
-<h1>Agregar orden a mesa <?php echo $cuenta['NumMesa'];?></h1>
+<h1>Agregar orden a <?php echo $cuenta['NumMesa'];?></h1>
 <form id="<?php echo $id_Cue; ?>" class="pure-form pure-form-stacked">
     <fieldset>
         <legend>Nueva Orden</legend>
@@ -30,6 +30,12 @@ include('../conexion.php');
 				    ?>
                 </select>
             </div>
+
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label for="">Comentarios</label>
+                <textarea id="comentarios" class="pure-u-1-2 form-edite" name="comentarios" value=""></textarea>
+            </div>
+
         </div>
         <br/>
         <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
@@ -54,9 +60,9 @@ include('../conexion.php');
      	var tipoId=$('#orden').val();
      	var cantidad=$('#cantidad').val();
      	var id_Cue=$('form').attr('id');
-     
+        var comentarios=$('#comentarios').val();
         $.ajax({ 
-        	data:{id_Cue:id_Cue, tipoID: tipoId, cantidad:cantidad},
+        	data:{id_Cue:id_Cue, tipoID: tipoId, cantidad:cantidad, comentarios:comentarios},
             type: "POST", 
             url: 'php/ordenes/funcionNuevaOrden.php',  
             success: function(data) { 

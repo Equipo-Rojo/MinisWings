@@ -16,14 +16,14 @@
                 </select>
             </div>
 
-            <div class="pure-u-1 pure-u-md-1-3">
+            <!--<div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Estatus</label>
                 <select id="status" class="pure-u-1-2 form-edite" name="status" value="">
                     <option>Seleccionar...</option>
                     <option name="status" value="Abierta">Abierta</option>
                     <option name="status" value="Cerrada">Cerrada</option>
                 </select>
-            </div>
+            </div>-->
         </div>
         <br/>
         <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>

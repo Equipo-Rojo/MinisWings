@@ -44,7 +44,7 @@ class orden
                         </tr>
                     </thead>
                     <tbody>';
-                    $sql1 = "SELECT * FROM cuentas INNER JOIN orden ON cuentas.id_Cue=orden.id_Cue WHERE estado='Pedido' ORDER BY id_Ord ASC";
+                    $sql1 = "SELECT * FROM cuentas INNER JOIN orden ON cuentas.id_Cue=orden.id_Cue WHERE estado='Recibido' ORDER BY id_Ord ASC";
                     $result1 = $this->con->query($sql1);
                     if ($result1->num_rows > 0) {
                         while($row1 = $result1->fetch_assoc()) 

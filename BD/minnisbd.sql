@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2016 a las 16:48:57
+-- Tiempo de generación: 02-11-2016 a las 19:15:28
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -42,7 +42,22 @@ INSERT INTO `asistencia` (`id`, `id_Emp`, `Fecha_Entrada`, `Fecha_Salida`) VALUE
 (21, 2, '2016-11-01 18:38:50', '2016-11-01 18:39:27'),
 (26, 1, '2016-11-02 15:42:49', '2016-11-02 15:48:54'),
 (27, 3, '2016-11-02 15:43:20', '2016-11-02 15:45:20'),
-(28, 2, '2016-11-02 15:44:12', '2016-11-02 15:45:14');
+(28, 2, '2016-11-02 15:44:12', '2016-11-02 15:45:14'),
+(29, 1, '2016-11-02 16:13:49', '2016-11-02 16:48:00'),
+(30, 17, '2016-11-02 16:48:05', '2016-11-02 16:48:11'),
+(31, 1, '2016-11-02 16:48:16', '2016-11-02 16:48:30'),
+(32, 17, '2016-11-02 16:48:38', '2016-11-02 16:48:47'),
+(33, 1, '2016-11-02 16:48:54', '2016-11-02 16:49:35'),
+(34, 17, '2016-11-02 16:49:39', '2016-11-02 16:49:45'),
+(35, 1, '2016-11-02 16:49:48', '2016-11-02 16:49:57'),
+(36, 2, '2016-11-02 16:50:01', '2016-11-02 16:52:31'),
+(37, 1, '2016-11-02 16:52:47', '2016-11-02 17:19:50'),
+(38, 3, '2016-11-02 17:19:55', '2016-11-02 17:23:14'),
+(39, 1, '2016-11-02 17:23:17', NULL),
+(40, 2, '2016-11-02 18:00:56', '2016-11-02 18:01:32'),
+(41, 17, '2016-11-02 18:01:38', '2016-11-02 18:03:52'),
+(42, 2, '2016-11-02 18:04:01', '2016-11-02 18:09:50'),
+(43, 17, '2016-11-02 18:09:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -101,14 +116,6 @@ CREATE TABLE `corte` (
   `Total` float(100,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `corte`
---
-
-INSERT INTO `corte` (`id_Cort`, `Fecha`, `Subtotal`, `Cortesias`, `Total`) VALUES
-(9, '2016-11-01 16:30:28', 170.00, 90.00, 80.00),
-(10, '2016-11-01 16:36:00', 170.00, 90.00, 80.00);
-
 -- --------------------------------------------------------
 
 --
@@ -128,12 +135,8 @@ CREATE TABLE `cuentas` (
 --
 
 INSERT INTO `cuentas` (`id_Cue`, `Estatus`, `NumMesa`, `id_Em`, `Total`) VALUES
-(1, 'Pagada', '1', 1, 30.00),
-(2, 'Pagada', '2', 1, 50.00),
-(3, 'Cortesia', '6', 1, 90.00),
-(4, 'Abierta', '1', 2, NULL),
-(5, 'Seleccionar...', '6', 2, NULL),
-(6, 'Abierta', '2', 2, NULL);
+(1, 'Pagada', 'Barra 1', 1, 0.00),
+(2, 'Abierta', 'Mesa 2', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -182,11 +185,11 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id_Inv`, `nombre`, `medida`, `cantidad`, `minimo`, `descripcion`, `status`) VALUES
-(1, 'Alitas', 'pza', 10, 100, 'Alitas de pollo', 'activo'),
+(1, 'Alitas', 'pza', 175, 100, 'Alitas de pollo', 'activo'),
 (2, 'Carne', 'grs.', 5000, 1000, 'Porción de carne', 'inactivo'),
 (3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'inactivo'),
 (4, 'Cerveza Corona', 'ml', 40, 20, 'Cerveza Corona 355ml', 'inactivo'),
-(5, 'Cerveza Victoria', 'ml.', 79, 50, 'Cerveza Victoria de vidrio 355ml.', 'activo');
+(5, 'Cerveza Victoria', 'ml.', 71, 50, 'Cerveza Victoria de vidrio 355ml.', 'activo');
 
 -- --------------------------------------------------------
 
@@ -218,14 +221,14 @@ CREATE TABLE `mesa` (
 --
 
 INSERT INTO `mesa` (`id_Mesa`, `NumMesa`, `Estatus`) VALUES
-(1, '1', 'Ocupada'),
-(2, '2', 'Ocupada'),
-(3, '3', 'Libre'),
-(4, '4', 'Libre'),
-(5, '5', 'Libre'),
-(6, '6', 'Ocupada'),
-(7, '8', 'Libre'),
-(8, '7', 'Libre');
+(1, 'Mesa 1', 'Libre'),
+(2, 'Mesa 2', 'Libre'),
+(3, 'Mesa 3', 'Libre'),
+(4, 'Mesa 4', 'Libre'),
+(5, 'Mesa 5', 'Libre'),
+(6, 'Mesa 6', 'Libre'),
+(7, 'Mesa 7', 'Libre'),
+(8, 'Barra 1', 'Libre');
 
 -- --------------------------------------------------------
 
@@ -239,6 +242,7 @@ CREATE TABLE `orden` (
   `id_Menu` int(11) NOT NULL,
   `tipo` varchar(30) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
+  `comentarios` varchar(70) NOT NULL,
   `estado` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -246,14 +250,14 @@ CREATE TABLE `orden` (
 -- Volcado de datos para la tabla `orden`
 --
 
-INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `tipo`, `cantidad`, `estado`) VALUES
-(1, 1, 2, 'platillo', 1, 'Servido'),
-(2, 3, 2, 'platillo', 3, 'Servido'),
-(3, 2, 1, 'promos', 1, 'Servido'),
-(4, 4, 2, 'platillo', 1, 'Cancelado'),
-(5, 6, 2, 'platillo', 2, 'Listo'),
-(6, 4, 1, 'promos', 1, 'Terminada'),
-(7, 6, 1, 'combos', 1, 'Pedido');
+INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `tipo`, `cantidad`, `comentarios`, `estado`) VALUES
+(1, 1, 2, 'platillo', 1, '', 'Cancelado'),
+(2, 1, 1, 'combos', 1, '', 'Cancelado'),
+(3, 1, 2, 'platillo', 1, '', 'Cancelado'),
+(4, 1, 1, 'platillo', 1, '', 'Cancelado'),
+(5, 2, 1, 'platillo', 1, '', 'Listo'),
+(6, 2, 2, 'platillo', 1, '', 'Recibido'),
+(7, 2, 1, 'platillo', 1, 'fghjklñ', 'Listo');
 
 -- --------------------------------------------------------
 
@@ -276,7 +280,7 @@ CREATE TABLE `platillo` (
 --
 
 INSERT INTO `platillo` (`id_Plat`, `nombre`, `categoria`, `precio`, `descripcion`, `Estado`, `url`) VALUES
-(1, 'Orden de alitas', 'Wings', 50.20, '5 pzas de alitas bañadas en salsa de mando', 'inactivo', ''),
+(1, 'Orden de alitas', 'Wings', 50.20, '5 pzas de alitas bañadas en salsa de mando', 'activo', ''),
 (2, 'Cerveza Victoria', 'Bebidas', 30.00, 'Cerveza Victoria de 355 ml.', 'activo', '');
 
 -- --------------------------------------------------------
@@ -299,7 +303,7 @@ CREATE TABLE `promos` (
 --
 
 INSERT INTO `promos` (`id_Promo`, `nombre`, `Descripcion`, `Fecha`, `precio`, `Estado`) VALUES
-(1, 'Alitas y cerveza', '1 Orden de alitas con 2 cervezas', '2016-11-05', 50.00, 'activo');
+(1, 'Alitas y cerveza', '1 Orden de alitas con 2 cervezas', '2016-11-24', 50.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -381,12 +385,8 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`id_Ven`, `id_Cue`, `Estado`, `Fecha_Apertura`, `Fecha_Cierre`, `Total_Cierre`) VALUES
-(1, 1, 'Cerrada', '2016-10-31 22:29:24', '2016-10-31', 30.00),
-(2, 2, 'Cerrada', '2016-11-01 00:29:30', '2016-11-01', 50.00),
-(3, 3, 'Cortesia', '2016-11-01 02:30:11', '2016-10-31', 90.00),
-(4, 4, 'Abierta', '2016-11-01 16:53:11', NULL, NULL),
-(5, 5, 'Abierta', '2016-11-01 16:53:41', NULL, NULL),
-(6, 6, 'Abierta', '2016-11-01 16:53:59', NULL, NULL);
+(1, 1, 'Cerrada', '2016-11-02 16:39:05', '2016-11-02', 0.00),
+(2, 2, 'Abierta', '2016-11-02 16:53:53', NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -496,7 +496,7 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT de la tabla `combos`
 --
@@ -511,12 +511,12 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `corte`
 --
 ALTER TABLE `corte`
-  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
@@ -556,7 +556,7 @@ ALTER TABLE `promos`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
