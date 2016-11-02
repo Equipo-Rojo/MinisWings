@@ -51,13 +51,13 @@ class orden
                         {
                             switch($row1['tipo']){
                                 case 'platillo':                                    
-                                   $sql2 = "SELECT * FROM platillo WHERE categoria NOT LIKE 'Bebidas' AND id_Plat=".$row1['id_Menu'];
+                                   $sql2 = "SELECT * FROM platillo WHERE categoria='Bebidas' AND id_Plat=".$row1['id_Menu'];
                                    break;
                                 case 'combos':
-                                    $sql2 = "SELECT * FROM combos INNER JOIN r_c_pl ON combos.id_Comb = r_c_pl.id_Comb INNER JOIN platillo ON r_c_pl.id_Plat=platillo.id_Plat WHERE categoria NOT LIKE 'Bebidas' AND combos.id_Comb=".$row1['id_Menu'];
+                                    $sql2 = "SELECT * FROM combos INNER JOIN r_c_pl ON combos.id_Comb = r_c_pl.id_Comb INNER JOIN platillo ON r_c_pl.id_Plat=platillo.id_Plat WHERE categoria='Bebidas' AND combos.id_Comb=".$row1['id_Menu'];
                                     break;
                                 case 'promos':
-                                    $sql2 = "SELECT * FROM promos INNER JOIN r_pr_pl ON promos.id_Promo = r_pr_pl.id_Prom INNER JOIN platillo ON r_pr_pl.id_Plat=platillo.id_Plat WHERE categoria NOT LIKE 'Bebidas' AND id_Promo=".$row1['id_Menu'];
+                                    $sql2 = "SELECT * FROM promos INNER JOIN r_pr_pl ON promos.id_Promo = r_pr_pl.id_Prom INNER JOIN platillo ON r_pr_pl.id_Plat=platillo.id_Plat WHERE categoria='Bebidas' AND id_Promo=".$row1['id_Menu'];
                                     break;
                             }
                             $result2 = $this->con->query($sql2);

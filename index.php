@@ -35,8 +35,8 @@
           </div>
     </body>
      <!-- ZONA DE SCRIPTS -->
-        <script src="../../js/alertify.min.js"></script>
-        <script src="../../js/jquery.min.js"></script>
+        <script src="js/alertify.min.js"></script>
+        <script src="js/jquery.min.js"></script>
 </html>
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

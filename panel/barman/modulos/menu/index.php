@@ -6,7 +6,11 @@
         <a class="pure-menu-heading" href="">Minni´s Wings</a>
         <legend>Barman</legend>
         <ul class="pure-menu-list">
-          
+
+            <li class="pure-menu-item">
+                <a href="bebidas" class="pure-menu-link"><i class="fa fa fa-beer fa-lg" aria-hidden="true"></i> Bebidas</a>
+            </li>
+
             <li class="pure-menu-item">
                 <a href="orden" class="pure-menu-link"><i class="fa fa-list fa-lg" aria-hidden="true"></i> Órdenes</a>
             </li>

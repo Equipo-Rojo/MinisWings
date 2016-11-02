@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2016 a las 17:31:55
+-- Tiempo de generación: 02-11-2016 a las 16:48:57
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.5.38
 
@@ -19,6 +19,30 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `minnisbd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `asistencia`
+--
+
+CREATE TABLE `asistencia` (
+  `id` int(11) NOT NULL,
+  `id_Emp` int(11) NOT NULL,
+  `Fecha_Entrada` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Fecha_Salida` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `asistencia`
+--
+
+INSERT INTO `asistencia` (`id`, `id_Emp`, `Fecha_Entrada`, `Fecha_Salida`) VALUES
+(20, 1, '2016-11-01 18:38:42', '2016-11-01 18:38:45'),
+(21, 2, '2016-11-01 18:38:50', '2016-11-01 18:39:27'),
+(26, 1, '2016-11-02 15:42:49', '2016-11-02 15:48:54'),
+(27, 3, '2016-11-02 15:43:20', '2016-11-02 15:45:20'),
+(28, 2, '2016-11-02 15:44:12', '2016-11-02 15:45:14');
 
 -- --------------------------------------------------------
 
@@ -39,7 +63,7 @@ CREATE TABLE `combos` (
 --
 
 INSERT INTO `combos` (`id_Comb`, `nombre`, `descripcion`, `precio`, `Estado`) VALUES
-(1, 'Alitas y cerveza', '1 orden de alitas y 1 cervezas', 90.00, 'inactivo');
+(1, 'Alitas y cerveza', '1 orden de alitas y 1 cervezas', 90.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -82,7 +106,8 @@ CREATE TABLE `corte` (
 --
 
 INSERT INTO `corte` (`id_Cort`, `Fecha`, `Subtotal`, `Cortesias`, `Total`) VALUES
-(9, '2016-11-01 16:30:28', 170.00, 90.00, 80.00);
+(9, '2016-11-01 16:30:28', 170.00, 90.00, 80.00),
+(10, '2016-11-01 16:36:00', 170.00, 90.00, 80.00);
 
 -- --------------------------------------------------------
 
@@ -105,7 +130,10 @@ CREATE TABLE `cuentas` (
 INSERT INTO `cuentas` (`id_Cue`, `Estatus`, `NumMesa`, `id_Em`, `Total`) VALUES
 (1, 'Pagada', '1', 1, 30.00),
 (2, 'Pagada', '2', 1, 50.00),
-(3, 'Cortesia', '6', 1, 90.00);
+(3, 'Cortesia', '6', 1, 90.00),
+(4, 'Abierta', '1', 2, NULL),
+(5, 'Seleccionar...', '6', 2, NULL),
+(6, 'Abierta', '2', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -154,11 +182,11 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id_Inv`, `nombre`, `medida`, `cantidad`, `minimo`, `descripcion`, `status`) VALUES
-(1, 'Alitas', 'pza', 20, 100, 'Alitas de pollo', 'activo'),
+(1, 'Alitas', 'pza', 10, 100, 'Alitas de pollo', 'activo'),
 (2, 'Carne', 'grs.', 5000, 1000, 'Porción de carne', 'inactivo'),
 (3, 'Carne', 'grs.', 100, 80, 'Porcion de carne ', 'inactivo'),
 (4, 'Cerveza Corona', 'ml', 40, 20, 'Cerveza Corona 355ml', 'inactivo'),
-(5, 'Cerveza Victoria', 'ml.', 84, 50, 'Cerveza Victoria de vidrio 355ml.', 'activo');
+(5, 'Cerveza Victoria', 'ml.', 79, 50, 'Cerveza Victoria de vidrio 355ml.', 'activo');
 
 -- --------------------------------------------------------
 
@@ -190,12 +218,12 @@ CREATE TABLE `mesa` (
 --
 
 INSERT INTO `mesa` (`id_Mesa`, `NumMesa`, `Estatus`) VALUES
-(1, '1', 'Libre'),
-(2, '2', 'Libre'),
+(1, '1', 'Ocupada'),
+(2, '2', 'Ocupada'),
 (3, '3', 'Libre'),
 (4, '4', 'Libre'),
 (5, '5', 'Libre'),
-(6, '6', 'Libre'),
+(6, '6', 'Ocupada'),
 (7, '8', 'Libre'),
 (8, '7', 'Libre');
 
@@ -221,7 +249,11 @@ CREATE TABLE `orden` (
 INSERT INTO `orden` (`id_Ord`, `id_Cue`, `id_Menu`, `tipo`, `cantidad`, `estado`) VALUES
 (1, 1, 2, 'platillo', 1, 'Servido'),
 (2, 3, 2, 'platillo', 3, 'Servido'),
-(3, 2, 1, 'promos', 1, 'Servido');
+(3, 2, 1, 'promos', 1, 'Servido'),
+(4, 4, 2, 'platillo', 1, 'Cancelado'),
+(5, 6, 2, 'platillo', 2, 'Listo'),
+(6, 4, 1, 'promos', 1, 'Terminada'),
+(7, 6, 1, 'combos', 1, 'Pedido');
 
 -- --------------------------------------------------------
 
@@ -351,11 +383,20 @@ CREATE TABLE `venta` (
 INSERT INTO `venta` (`id_Ven`, `id_Cue`, `Estado`, `Fecha_Apertura`, `Fecha_Cierre`, `Total_Cierre`) VALUES
 (1, 1, 'Cerrada', '2016-10-31 22:29:24', '2016-10-31', 30.00),
 (2, 2, 'Cerrada', '2016-11-01 00:29:30', '2016-11-01', 50.00),
-(3, 3, 'Cortesia', '2016-11-01 02:30:11', '2016-10-31', 90.00);
+(3, 3, 'Cortesia', '2016-11-01 02:30:11', '2016-10-31', 90.00),
+(4, 4, 'Abierta', '2016-11-01 16:53:11', NULL, NULL),
+(5, 5, 'Abierta', '2016-11-01 16:53:41', NULL, NULL),
+(6, 6, 'Abierta', '2016-11-01 16:53:59', NULL, NULL);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `combos`
@@ -452,6 +493,11 @@ ALTER TABLE `venta`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
 -- AUTO_INCREMENT de la tabla `combos`
 --
 ALTER TABLE `combos`
@@ -465,12 +511,12 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `corte`
 --
 ALTER TABLE `corte`
-  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_Cort` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Cue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
@@ -495,7 +541,7 @@ ALTER TABLE `mesa`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Ord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `platillo`
 --
@@ -510,7 +556,7 @@ ALTER TABLE `promos`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Ven` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
