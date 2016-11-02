@@ -117,29 +117,30 @@
             var valido=1;
             var datoscombo=[];
             var camposcombo=[];
-            var datosPlatillo=[];
-            var camposPlatillo=[];
+            var idPlatillo=[];
+            var cantPlatillo=[];
             $( ".form-add-combo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
                 camposcombo.push($(this).attr('name'));
                 datoscombo.push('"'+$(this).val()+'"');
-                
             });
-            $( ".form-add-Platillo" ).each(function(){
-                if($(this).val()=="" || $(this).val()=="Seleccionar..."){valido=0;}
-                camposPlatillo.push($(this).attr('name'));
-                datosPlatillo.push('"'+$(this).val()+'"');
-                
+            $( ".form-id-Platillo" ).each(function(){
+                if($(this).val()=="Seleccionar..."){valido=0;}
+                idPlatillo.push($(this).val());
+            });
+            $( ".form-cant-Platillo" ).each(function(){
+                if($(this).val()==""){valido=0;}
+                cantPlatillo.push($(this).val());
             });
 
             if(valido==1){
                 var datoscomboJSON = JSON.stringify(datoscombo);
                 var camposcomboJSON = JSON.stringify(camposcombo);
-                var datosPlatilloJSON = JSON.stringify(datosPlatillo);
-                var camposPlatilloJSON = JSON.stringify(camposPlatillo);
+                var idPlatilloJSON = JSON.stringify(idPlatillo);
+                var cantPlatilloJSON = JSON.stringify(cantPlatillo);
                 var url=$('#fileUpload').val();
                 $.ajax({ 
-                    data : {url:url,datosCombo:datoscomboJSON, camposCombo:camposcomboJSON, datosPlatillo: datosPlatilloJSON, camposPlatillo: camposPlatilloJSON},
+                    data : {url:url,datosCombo:datoscomboJSON, camposCombo:camposcomboJSON, idPlatillo: idPlatilloJSON, cantPlatillo: cantPlatilloJSON},
                     type: "POST", 
                     url: 'php/combo/funcionAgregar.php',  
                     success: function(data) {
