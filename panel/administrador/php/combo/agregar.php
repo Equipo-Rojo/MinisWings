@@ -1,6 +1,6 @@
 <style type="text/css">.thumb-image{float:right;width:100px;position:relative;padding:none;}</style>
 <h1>Agregar combo</h1>
-<form class="pure-form pure-form-stacked">
+<div id="Agregar-Combo"><form id="Agregar-Combo-Fom" class="pure-form pure-form-stacked">
     <fieldset>
         <legend>Nuevo combo</legend>
 
@@ -17,7 +17,7 @@
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Precio</label>
-                <input id="pre" class="pure-u-1-2 form-add-combo" type="number" name="precio" value="" required >
+                <input id="pre" class="pure-u-1-2 form-add-combo" type="number" name="precio" value="" min="1" required >
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
@@ -25,14 +25,6 @@
                 <textarea id="des" class="pure-u-1-2 form-add-combo" type="text" name="descripcion" value="" required ></textarea>
             </div>
 
-            <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Estado</label>
-                <select id="Estado" class="pure-u-1-2 form-add-combo" name="Estado" value="">
-                    <option>Seleccionar...</option>
-                    <option name="Estado" value="inactivo">Inactivo</option>
-                    <option name="Estado" value="activo" >Activo</option>
-                </select>
-            </div>
         </div>
         <legend>Platillos</legend>
         <div id="combo" class="pure-g">
@@ -50,7 +42,7 @@
 </form>
 <script>
     $(document).ready(function() {
-        var ing = 2;
+        var ing = 1;
         $("#fileUpload").on('change', function() {
           //Get count of selected files
           var countFiles = $(this)[0].files.length;
@@ -77,6 +69,7 @@
               alertify.alert("Este navegador no soporta FileReader.");
             }
           } else {
+            $('input#fileUpload').value="";
             alertify.alert("Por favor seleccione solo imagenes.");
           }
         });
@@ -114,47 +107,45 @@
         //---------- Boton de guardar combo
         $('#guardar').click(function(event){
             event.preventDefault();
+
             var valido=1;
-            var datoscombo=[];
-            var camposcombo=[];
-            var idPlatillo=[];
-            var cantPlatillo=[];
+
             $( ".form-add-combo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
-                camposcombo.push($(this).attr('name'));
-                datoscombo.push('"'+$(this).val()+'"');
             });
             $( ".form-id-Platillo" ).each(function(){
                 if($(this).val()=="Seleccionar..."){valido=0;}
-                idPlatillo.push($(this).val());
             });
             $( ".form-cant-Platillo" ).each(function(){
                 if($(this).val()==""){valido=0;}
-                cantPlatillo.push($(this).val());
             });
 
             if(valido==1){
-                var datoscomboJSON = JSON.stringify(datoscombo);
-                var camposcomboJSON = JSON.stringify(camposcombo);
-                var idPlatilloJSON = JSON.stringify(idPlatillo);
-                var cantPlatilloJSON = JSON.stringify(cantPlatillo);
-                var url=$('#fileUpload').val();
-                $.ajax({ 
-                    data : {url:url,datosCombo:datoscomboJSON, camposCombo:camposcomboJSON, idPlatillo: idPlatilloJSON, cantPlatillo: cantPlatilloJSON},
-                    type: "POST", 
-                    url: 'php/combo/funcionAgregar.php',  
-                    success: function(data) {
-                        alertify.alert(data);
+                var form = $('div#Agregar-Combo').find('form#Agregar-Combo-Fom')[0];
+                var formulario = new FormData(form);
+
+                $.cookie('contador', ing, {path: '/'});
+
+                $.ajax({
+                    data: formulario, // Esto se enviará al php
+                    url: 'php/combo/funcionAgregar.php',
+                    type: 'POST',   
+                    async: false,     
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (infoRegreso) {
+                        alertify.alert(infoRegreso);
                         $.ajax({ 
                             type: "POST", 
-                            url: data,  
+                            url: 'modulos/menu/combo.php',  
                             success: function(data) {
                                 $("div#main").empty();
                                 $("div#main").append(data);
                             }  
                         });  
-                    }  
-                }); 
+                    }
+                });
             }
             else{
                 alertify.alert("Faltan campos");

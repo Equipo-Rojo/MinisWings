@@ -19,12 +19,14 @@ if(isset($_SESSION['user'])){
      </div>
 			
 	    </div>
-	    <!-- ZONA DE SCRIPTS -->
+
+	</body>
+		<!-- ZONA DE SCRIPTS -->
 	    <script src="../../js/alertify.min.js"></script>
 	    <script src="../../js/jquery.min.js"></script>
     	<script src="../../js/shell.js"></script>
     	<script src="../../js/menu.js"></script>
-	</body>
+    	<script src="../../js/jquery-cookie/jquery.cookie.js"></script>
 </html>
 
 
