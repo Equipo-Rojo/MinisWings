@@ -39,7 +39,8 @@ class orden
                             <th># Mesa</th>
                             <th>Cantidad</th>
                             <th>Nombre</th>
-                            <th>Tipo</th>
+                       
+                            <th>Comentarios</th>
                             <th>Preparar</th>
                             <th>Terminar</th>
                         </tr>
@@ -68,7 +69,7 @@ class orden
                                 <tr><th>'.$row1['NumMesa'].'</th>
                                     <td>'.$row1['cantidad'].'</td>
                                     <td>'.$row2['nombre'].'</td>
-                                    <td>'.$row1['tipo'].'</td>
+                                    <td>'.$row1['comentarios'].'</td>
                                     <th><i id="'.$row1['id_Ord'].'" class="fa fa-hand-pointer-o change-preparar" aria-hidden="true"></i></th>
                                     <th></th>
                                 </tr>';
@@ -99,7 +100,7 @@ class orden
                                 <tr><th>'.$row1['NumMesa'].'</th>
                                     <td>'.$row1['cantidad'].'</td>
                                     <td>'.$row2['nombre'].'</td>
-                                    <td>'.$row1['tipo'].'</td>
+                                    <td>'.$row1['comentarios'].'</td>
                                     <th></th>
                                     <th><i id="'.$row1['id_Ord'].'" class="fa fa-hand-pointer-o change-preparar" aria-hidden="true"></i></th>
                                 </tr>';
