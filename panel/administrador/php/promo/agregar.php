@@ -1,61 +1,53 @@
 <style type="text/css">.thumb-image{float:right;width:100px;position:relative;padding:none;}</style>
-<h1>Agregar Promoción</h1>
-<form class="pure-form pure-form-stacked">
+<h1>Agregar promocipon</h1>
+<div id="Agregar-promo"><form id="Agregar-promo-Form" class="pure-form pure-form-stacked">
     <fieldset>
-        <legend>Nueva Promo</legend>
+        <legend>Nueva promoción</legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="form-add-Promo" name="url" multiple="multiple" type="file"/> 
+            <input id="fileUpload" class="form-add-promo button-secondary pure-button" name="url" multiple="multiple" type="file"/> 
             <div id="image-holder"></div>
         </div> 
 
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Nombre de Promoción</label>
-                <input id="nom" class="pure-u-1-2 form-add-Promo" type="text" name="nombre" value="" required>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Categoria</label>
-                <input id="cat" class="pure-u-1-2 form-add-Promo" type="text" name="categoria" value="" required>
+                <label for="">Nombre de la promoción</label>
+                <input id="nom" class="pure-u-1-2 form-add-promo" type="text" name="nombre" value="" required>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Precio</label>
-                <input id="pre" class="pure-u-1-2 form-add-Promo" type="number" name="precio" value="" required >
+                <input id="pre" class="pure-u-1-2 form-add-promo" type="number" name="precio" value="" min="1" required >
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Descripción</label>
-                <textarea id="des" class="pure-u-1-2 form-add-Promo" type="text" name="descripcion" value="" required ></textarea>
+                <textarea id="des" class="pure-u-1-2 form-add-promo" type="text" name="descripcion" value="" required ></textarea>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Estado</label>
-                <select id="sta" class="pure-u-1-2 form-add-Promo" name="" value="">
-                    <option>Seleccionar...</option>
-                    <option name="sta" value="inactivo">Inactivo</option>
-                    <option name="sta" value="activo" >Activo</option>
-                </select>
+                <label for="">Fecha de vigencia</label>
+                <input id="fec" class="pure-u-1-2 form-add-promo" type="date" name="fecha" value="" min="1" required >
             </div>
+
         </div>
-        <legend>Ingredientes</legend>
-        <div id="Promo" class="pure-g">
+        <legend>Platillos</legend>
+        <div id="promo" class="pure-g">
             <?php
-                include('../Promo.php');
-                $ing = new Promo();
-                $ing -> listarCombos(1);
+                include('../promo.php');
+                $ing = new promo();
+                $ing -> listarPlatillo(1);
             ?>
         </div>
-        <button id="agregar" type="button" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Ingrediente</button>
-        <button id="borrar" type="button" class="pure-button button-warning"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Ingrediente</button>
+        <button id="agregar" type="button" class="pure-button "><i class="fa fa-plus" aria-hidden="true"></i> Agregar Platillo</button>
+        <button id="borrar" type="button" class="pure-button button-secondary"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Platillo</button>
         <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
 </form>
 <script>
     $(document).ready(function() {
-        var ing = 2;
+        var ing = 1;
         $("#fileUpload").on('change', function() {
           //Get count of selected files
           var countFiles = $(this)[0].files.length;
@@ -82,81 +74,88 @@
               alertify.alert("Este navegador no soporta FileReader.");
             }
           } else {
+            $('input#fileUpload').value="";
             alertify.alert("Por favor seleccione solo imagenes.");
           }
         });
-        //---------- Boton de cancelar Promo
+        //---------- Boton de cancelar promo
         $('#cancelar').click(function(event){
             event.preventDefault();
             $.ajax({ 
                 type: "POST", 
-                url: 'modulos/menu/Promo.php',  
+                url: 'modulos/menu/promo.php',  
                 success: function(data) {
                     $("div#main").empty();
                     $("div#main").append(data);
                 }  
             });    
         });
-        //---------- Boton de agregar ingrediente
+        //---------- Boton de agregar Platillo
         $('#agregar').click(function(event){
             event.preventDefault();
             ing++;
             $.ajax({ 
                 data:{num:ing},
                 type: "POST", 
-                url: 'php/promo/combo.php',  
+                url: 'php/promo/Platillo.php',  
                 success: function(data) {
-                    $("#Promo").append(data);
+                    $("#promo").append(data);
                 }  
             });  
         });  
-        //---------- Boton de borrar ingrediente
+        //---------- Boton de borrar Platillo
         $('#borrar').click(function(event){
             event.preventDefault();
-            $("#combo"+ing).remove();
+            $("#promo"+ing).remove();
             ing--;   
         });  
-        //---------- Boton de guardar Promo
+        //---------- Boton de guardar promo
         $('#guardar').click(function(event){
             event.preventDefault();
-            var valido=1;
-            var datosPromo=[];
-            var camposPromo=[];
-            var datosIngrediente=[];
-            var camposIngrediente=[];
-            $( ".form-add-Promo" ).each(function(){
+
+            var valido=1; // 1 = campos completos: 0 = faltan campos de llenar
+
+            // aqui se valida que todos los campos esten llenos
+            $( ".form-add-promo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
-                camposPromo.push($(this).attr('name'));
-                datosPromo.push('"'+$(this).val()+'"');
-                
             });
-            $( ".form-add-ingrediente" ).each(function(){
-                if($(this).val()=="" || $(this).val()=="Seleccionar..."){valido=0;}
-                camposIngrediente.push($(this).attr('name'));
-                datosIngrediente.push('"'+$(this).val()+'"');
-                
+            $( ".form-id-Platillo" ).each(function(){
+                if($(this).val()=="Seleccionar..."){valido=0;}
+            });
+            $( ".form-cant-Platillo" ).each(function(){
+                if($(this).val()==""){valido=0;}
             });
 
-            if(valido==1){
-                var datosPromoJSON = JSON.stringify(datosPromo);
-                var camposPromoJSON = JSON.stringify(camposPromo);
-                var datosIngredienteJSON = JSON.stringify(datosIngrediente);
-                var camposIngredienteJSON = JSON.stringify(camposIngrediente);
-                $.ajax({ 
-                    data : {datosPromo:datosPromoJSON, camposPromo:camposPromoJSON, datosIngrediente: datosIngredienteJSON, camposIngrediente: camposIngredienteJSON},
-                    type: "POST", 
-                    url: 'php/Promo/funcionAgregar.php',  
-                    success: function(data) {
+            if(valido==1){  // si todos los campos estan llenos
+
+                // estas dos lineas serializan el formulario
+                var form = $('div#Agregar-promo').find('form#Agregar-promo-Form')[0];
+                var formulario = new FormData(form);
+                // SE COLOCA UNA COOKIE CON EL NUMERO DE PLATILLOS
+                $.cookie('contador', ing, {path: '/'});
+
+
+                //SE ENVIA EL DORMULARIO SERIALIZADO POR AJAX A FUNCIONAGREGAR
+                $.ajax({
+                    data: formulario, 
+                    url: 'php/promo/funcionAgregar.php',
+                    type: 'POST',   
+                    async: false,     
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (infoRegreso) {
+                        alertify.alert(infoRegreso);
                         $.ajax({ 
                             type: "POST", 
-                            url: data,  
+                            url: 'modulos/menu/promo.php',  
                             success: function(data) {
                                 $("div#main").empty();
                                 $("div#main").append(data);
                             }  
                         });  
-                    }  
-                }); 
+                    }
+                });
             }
             else{
                 alertify.alert("Faltan campos");
