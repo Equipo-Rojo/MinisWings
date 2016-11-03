@@ -1,5 +1,5 @@
 <style type="text/css">.thumb-image{float:right;width:100px;position:relative;padding:none;}</style>
-<h1>Agregar promocipon</h1>
+<h1>Agregar promoción</h1>
 <div id="Agregar-promo"><form id="Agregar-promo-Form" class="pure-form pure-form-stacked">
     <fieldset>
         <legend>Nueva promoción</legend>

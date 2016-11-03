@@ -28,7 +28,7 @@
                 for($i=1;$i<=$cont;$i++)  
                 {
                     $sql="INSERT INTO r_pr_pl (id_Prom,id_Plat,cant) VALUES (".$id_Promo.",".$_POST['id_Plat'.$i].",".$_POST['cant_'.$i].")";
-                    echo $sql;
+         
                     $result = $con->query($sql);
                 }
 
@@ -43,7 +43,7 @@
                 $result = $con->query($sql);
                 if($con->affected_rows){
 				    $con->close();
-                   // echo "Promoción creada con exito!!";
+                    echo "Promoción creada con exito!!";
                 }
             }
         }      

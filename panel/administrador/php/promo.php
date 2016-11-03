@@ -81,17 +81,17 @@ class promo
         $this->con->close();
     }
      //--------------cargar platillos ya registrados en el combo
-    public function cargarPlatillo($id_Comb){
+    public function cargarPlatillo($id_Prom){
 
         // ES IMPORTANTE CADA SELECT Y CADA INPUT TENGA UN NAME CONCATENABLE PARA DIFERENCIARLOS 
         $this->conectar();
         $num=1;
         $platillo="";
-        $sql = "SELECT * FROM r_c_pl WHERE id_Comb=".$id_Comb;
+        $sql = "SELECT * FROM r_pr_pl WHERE id_Prom=".$id_Prom;
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $platillo.='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3">
+                $platillo.='<div id="promo'.$num.'" class="pure-u-1 pure-u-md-1-3">
                 <select class="pure-u-1-2 form-id-Platillo" name="id_Plat'.$num.'" value=""><option>Seleccionar...</option>';
 
                 $sql1 = "SELECT * FROM platillo WHERE Estado='activo'";
