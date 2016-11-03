@@ -61,6 +61,8 @@ class combo
     }
     //--------------Listar Platillos
     public function listarPlatillo($num){
+
+        // ES IMPORTANTE CADA SELECT Y CADA INPUT TENGA UN NAME CONCATENABLE PARA DIFERENCIARLOS 
         $this->conectar();
         $Platillo='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3">
         <select class="pure-u-1-2 form-id-Platillo" name="id_Plat'.$num.'" value=""><option>Seleccionar...</option>';

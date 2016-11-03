@@ -5,7 +5,7 @@
         <legend>Nuevo combo</legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="" name="url" multiple="multiple" type="file"/> 
+            <input id="fileUpload" class="form-add-platillo button-secondary pure-button" name="url" multiple="multiple" type="file"/> 
             <div id="image-holder"></div>
         </div> 
 
@@ -108,8 +108,9 @@
         $('#guardar').click(function(event){
             event.preventDefault();
 
-            var valido=1;
+            var valido=1; // 1 = campos completos: 0 = faltan campos de llenar
 
+            // aqui se valida que todos los campos esten llenos
             $( ".form-add-combo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
             });
@@ -120,14 +121,18 @@
                 if($(this).val()==""){valido=0;}
             });
 
-            if(valido==1){
+            if(valido==1){  // si todos los campos estan llenos
+
+                // estas dos lineas serializan el formulario
                 var form = $('div#Agregar-Combo').find('form#Agregar-Combo-Fom')[0];
                 var formulario = new FormData(form);
-
+                // SE COLOCA UNA COOKIE CON EL NUMERO DE PLATILLOS
                 $.cookie('contador', ing, {path: '/'});
 
+
+                //SE ENVIA EL DORMULARIO SERIALIZADO POR AJAX A FUNCIONAGREGAR
                 $.ajax({
-                    data: formulario, // Esto se enviará al php
+                    data: formulario, 
                     url: 'php/combo/funcionAgregar.php',
                     type: 'POST',   
                     async: false,     
