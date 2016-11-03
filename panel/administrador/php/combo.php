@@ -113,7 +113,4 @@ class combo
         echo $platillo;
         $this->con->close();
     }
-
-
-
 }
