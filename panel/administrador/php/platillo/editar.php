@@ -1,61 +1,70 @@
+<?php
+    $id=$_POST['id'];
+    setcookie ("platillo", $id, 0, '/');
+    include('../conexion.php');
+    $con = new Conexion('datosServer.php');
+    $con = $con->conectar();
+
+    $sql = "SELECT * FROM platillo WHERE id_Plat=".$id;
+    $result = $con->query($sql);
+    $producto = $result->fetch_assoc();
+?>
 <style type="text/css">.thumb-image{float:right;width:100px;position:relative;padding:none;}</style>
-<h1>Editar Platillo</h1>
-<form class="pure-form pure-form-stacked">
+<h1>Editar platillo</h1>
+<div id="Editar-platillo"><form id="Editar-platillo-Form" class="pure-form pure-form-stacked">
     <fieldset>
-        <legend>Nuevo Platillo</legend>
+        <legend><?php echo $producto['nombre']; ?></legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="form-add-platillo" name="url" multiple="multiple" type="file"/> 
-            <div id="image-holder"></div>
+            <input id="fileUpload" class="button-secondary pure-button" name="url" multiple="multiple" type="file"/> 
+            <div id="image-holder"><img class="thumb-image" src="<?php echo '../../'.$producto['url'];?>"></div>
         </div> 
 
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Nombre del platillo</label>
-                <input id="nom" class="pure-u-1-2 form-add-platillo" type="text" name="nombre" value="" required>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Categoria</label>
-                <input id="cat" class="pure-u-1-2 form-add-platillo" type="text" name="categoria" value="" required>
+                <input id="nom" class="pure-u-1-2 form-add-platillo" type="text" name="nombre" value="<?php echo $producto['nombre']; ?>" required>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Precio</label>
-                <input id="pre" class="pure-u-1-2 form-add-platillo" type="number" name="precio" value="" required >
+                <input id="pre" class="pure-u-1-2 form-add-platillo" type="number" name="precio" value="<?php echo $producto['precio']; ?>" min="1" required >
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Descripción</label>
-                <textarea id="des" class="pure-u-1-2 form-add-platillo" type="text" name="descripcion" value="" required ></textarea>
+                <textarea id="des" class="pure-u-1-2 form-add-platillo" type="text" name="descripcion" value="" required ><?php echo $producto['descripcion']; ?></textarea>
             </div>
 
-            <div class="pure-u-1 pure-u-md-1-3">
-                <label for="">Estado</label>
-                <select id="sta" class="pure-u-1-2 form-add-platillo" name="" value="">
-                    <option>Seleccionar...</option>
-                    <option name="sta" value="inactivo">Inactivo</option>
-                    <option name="sta" value="activo" >Activo</option>
+             <div class="pure-u-1 pure-u-md-1-3">
+                <label for="">Categoria</label>
+                <select  class="pure-u-1-2 form-add-platillo"  name="categoria" >
+                    <option name="categoria" >Seleccionar...</option>
+                    <option <?php if($producto['categoria']=='Bebidas'){echo "selected";}?> name="categoria" >Bebidas</option>
+                    <option <?php if($producto['categoria']=='Apetizers'){echo "selected";}?> name="categoria" >Apetizers</option>
+                    <option <?php if($producto['categoria']=='Chicken'){echo "selected";}?> name="categoria" >Chicken</option>
+                    <option <?php if($producto['categoria']=='Burguers'){echo "selected";}?> name="categoria" >Burguers</option>
                 </select>
             </div>
+
         </div>
         <legend>Ingredientes</legend>
         <div id="platillo" class="pure-g">
             <?php
                 include('../platillo.php');
                 $ing = new platillo();
-                $ing -> listarIngrediente(1);
+                $ing -> cargarIngrediente($id);
             ?>
         </div>
-        <button id="agregar" type="button" class="pure-button button-warning"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Ingrediente</button>
-        <button id="borrar" type="button" class="pure-button button-warning"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Ingrediente</button>
+        <button id="Agregar" type="button" class="pure-button "><i class="fa fa-plus" aria-hidden="true"></i> Agregar Ingrediente</button>
+        <button id="borrar" type="button" class="pure-button button-secondary"><i class="fa fa-minus-circle" aria-hidden="true"></i> Borrar último Ingrediente</button>
         <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
 </form>
 <script>
     $(document).ready(function() {
-        var ing = 2;
+        var ing = 1;
         $("#fileUpload").on('change', function() {
           //Get count of selected files
           var countFiles = $(this)[0].files.length;
@@ -82,6 +91,7 @@
               alertify.alert("Este navegador no soporta FileReader.");
             }
           } else {
+            $('input#fileUpload').value="";
             alertify.alert("Por favor seleccione solo imagenes.");
           }
         });
@@ -97,20 +107,20 @@
                 }  
             });    
         });
-        //---------- Boton de agregar ingrediente
-        $('#agregar').click(function(event){
+        //---------- Boton de Editar Ingrediente
+        $('#Agregar').click(function(event){
             event.preventDefault();
             ing++;
             $.ajax({ 
                 data:{num:ing},
                 type: "POST", 
-                url: 'php/platillo/ingrediente.php',  
+                url: 'php/platillo/Ingrediente.php',  
                 success: function(data) {
                     $("#platillo").append(data);
                 }  
             });  
         });  
-        //---------- Boton de borrar ingrediente
+        //---------- Boton de borrar Ingrediente
         $('#borrar').click(function(event){
             event.preventDefault();
             $("#platillo"+ing).remove();
@@ -119,44 +129,51 @@
         //---------- Boton de guardar platillo
         $('#guardar').click(function(event){
             event.preventDefault();
-            var valido=1;
-            var datosPlatillo=[];
-            var camposPlatillo=[];
-            var datosIngrediente=[];
-            var camposIngrediente=[];
+
+            var valido=1; // 1 = campos completos: 0 = faltan campos de llenar
+
+            // aqui se valida que todos los campos esten llenos
             $( ".form-add-platillo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
-                camposPlatillo.push($(this).attr('name'));
-                datosPlatillo.push('"'+$(this).val()+'"');
-                
             });
-            $( ".form-add-ingrediente" ).each(function(){
-                if($(this).val()=="" || $(this).val()=="Seleccionar..."){valido=0;}
-                camposIngrediente.push($(this).attr('name'));
-                datosIngrediente.push('"'+$(this).val()+'"');
-                
+            $( ".form-id-Ingrediente" ).each(function(){
+                if($(this).val()=="Seleccionar..."){valido=0;}
+            });
+            $( ".form-cant-Ingrediente" ).each(function(){
+                if($(this).val()==""){valido=0;}
             });
 
-            if(valido==1){
-                var datosPlatilloJSON = JSON.stringify(datosPlatillo);
-                var camposPlatilloJSON = JSON.stringify(camposPlatillo);
-                var datosIngredienteJSON = JSON.stringify(datosIngrediente);
-                var camposIngredienteJSON = JSON.stringify(camposIngrediente);
-                $.ajax({ 
-                    data : {datosPlatillo:datosPlatilloJSON, camposPlatillo:camposPlatilloJSON, datosIngrediente: datosIngredienteJSON, camposIngrediente: camposIngredienteJSON},
-                    type: "POST", 
-                    url: 'php/platillo/funcionAgregar.php',  
-                    success: function(data) {
+            if(valido==1){  // si todos los campos estan llenos
+
+                // estas dos lineas serializan el formulario
+                var form = $('div#Editar-platillo').find('form#Editar-platillo-Form')[0];
+                var formulario = new FormData(form);
+                // SE COLOCA UNA COOKIE CON EL NUMERO DE IngredienteS
+                $.cookie('contador', ing, {path: '/'});
+
+
+                //SE ENVIA EL DORMULARIO SERIALIZADO POR AJAX A FUNCIONEditar
+                $.ajax({
+                    data: formulario, 
+                    url: 'php/platillo/funcionEditar.php',
+                    type: 'POST',   
+                    async: false,     
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (infoRegreso) {
+                        alertify.alert(infoRegreso);
                         $.ajax({ 
                             type: "POST", 
-                            url: data,  
+                            url: 'modulos/menu/platillo.php',  
                             success: function(data) {
-                                $("div#main").empty();
-                                $("div#main").append(data);
+                                //$("div#main").empty();
+                                //$("div#main").append(data);
+                                location.reload();
                             }  
                         });  
-                    }  
-                }); 
+                    }
+                });
             }
             else{
                 alertify.alert("Faltan campos");

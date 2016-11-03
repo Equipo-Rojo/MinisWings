@@ -32,7 +32,7 @@
                     <option name="categoria" >Bebidas</option>
                     <option name="categoria" >Apetizers</option>
                     <option name="categoria" >Chicken</option>
-                    <option name="categoria" >Burgers</option>
+                    <option name="categoria" >Burguers</option>
                 </select>
             </div>
 

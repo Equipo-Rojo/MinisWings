@@ -87,25 +87,25 @@ class platillo
         $this->conectar();
         $num=1;
         $platillo="";
-        $sql = "SELECT * FROM r_c_pl WHERE id_Comb=".$id_Comb;
+        $sql = "SELECT * FROM r_pl_in WHERE id_Plat=".$id_Plat;
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $platillo.='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3">
-                <select class="pure-u-1-2 form-id-Platillo" name="id_Plat'.$num.'" value=""><option>Seleccionar...</option>';
+                $platillo.='<div id="platillo'.$num.'" class="pure-u-1 pure-u-md-1-3">
+                <select class="pure-u-1-2 form-id-Ingrediente" name="id_Inv'.$num.'" value=""><option>Seleccionar...</option>';
 
-                $sql1 = "SELECT * FROM platillo WHERE Estado='activo'";
+                $sql1 = "SELECT * FROM inventario WHERE status='activo'";
                 $result1 = $this->con->query($sql1);
                 if ($result1->num_rows > 0) {
                     while($row1 = $result1->fetch_assoc()) {
-                            $platillo.= '<option name="id_Plat'.$num.'" value="'.$row1['id_Plat'].'"';
-                            if($row['id_Plat']==$row1['id_Plat']){$platillo.=' selected ';}
+                            $platillo.= '<option name="id_Inv'.$num.'" value="'.$row1['id_Inv'].'"';
+                            if($row['id_Inv']==$row1['id_Inv']){$platillo.=' selected ';}
                             $platillo.='>'.$row1['nombre'].'</option>';
                     }
                 }
                 $platillo.='</select>
 
-                <input type="number" min="1" class="pure-u-1-2 form-cant-Platillo" name="cant_'.$num.'" placeholder="Cantidad" value="'.$row['cant'].'"/></div>';
+                <input type="number" min="1" class="pure-u-1-2 form-cant-Ingrediente" name="cant_'.$num.'" placeholder="Cantidad" value="'.$row['cant'].'"/></div>';
                 $num++;
             }
             
