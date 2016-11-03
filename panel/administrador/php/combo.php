@@ -79,6 +79,40 @@ class combo
         echo $Platillo;
         $this->con->close();
     }
+     //--------------cargar platillos ya registrados en el combo
+    public function cargarPlatillo($id_Comb){
+
+        // ES IMPORTANTE CADA SELECT Y CADA INPUT TENGA UN NAME CONCATENABLE PARA DIFERENCIARLOS 
+        $this->conectar();
+        $num=1;
+        $platillo="";
+        $sql = "SELECT * FROM r_c_pl WHERE id_Comb=".$id_Comb;
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $platillo.='<div id="combo'.$num.'" class="pure-u-1 pure-u-md-1-3">
+                <select class="pure-u-1-2 form-id-Platillo" name="id_Plat'.$num.'" value=""><option>Seleccionar...</option>';
+
+                $sql1 = "SELECT * FROM platillo WHERE Estado='activo'";
+                $result1 = $this->con->query($sql1);
+                if ($result1->num_rows > 0) {
+                    while($row1 = $result1->fetch_assoc()) {
+                            $platillo.= '<option name="id_Plat'.$num.'" value="'.$row1['id_Plat'].'"';
+                            if($row['id_Plat']==$row1['id_Plat']){$platillo.=' selected ';}
+                            $platillo.='>'.$row1['nombre'].'</option>';
+                    }
+                }
+                $platillo.='</select>
+
+                <input type="number" min="1" class="pure-u-1-2 form-cant-Platillo" name="cant_'.$num.'" placeholder="Cantidad" value="'.$row['cant'].'"/></div>';
+                $num++;
+            }
+            
+        }
+        setcookie ("contador", $num, 0, '/');
+        echo $platillo;
+        $this->con->close();
+    }
 
 
 

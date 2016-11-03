@@ -30,16 +30,17 @@
                     $sql="INSERT INTO r_c_pl (id_Comb,id_Plat,cant) VALUES (".$id_Comb.",".$_POST['id_Plat'.$i].",".$_POST['cant_'.$i].")";
                     $result = $con->query($sql);
                 }
+
+                // SE MUEVE LA IMAGEN A LA RUTA EN LA QUE QUEDARA, PRIMERO SE DEBE SALIR DE LA CARPETA ACTUAL
+                // SE LE CONCATENA EL ID DEL COMBO AL QUE PERTENECE
+                $ruta_final="../../../../img/combo/combo_".$id_Comb.".jpg";
+                move_uploaded_file($_FILES["url"]["tmp_name"], $ruta_final);
                 
                 // SE INSERTA LA RUTA GLOBAL DE DONDE QUEDARA LA IMAGEN
                 $ruta_final="img/combo/combo_".$id_Comb.".jpg";
                 $sql = "UPDATE combos SET Url='".$ruta_final."' WHERE id_Comb='".$id_Comb."'";
                 $result = $con->query($sql);
                 if($con->affected_rows){
-                    // SE MUEVE LA IMAGEN A LA RUTA EN LA QUE QUEDARA, PRIMERO SE DEBE SALIR DE LA CARPETA ACTUAL
-                    // SE LE CONCATENA EL ID DEL COMBO AL QUE PERTENECE
-                	$ruta_final="../../../../img/combo/combo_".$id_Comb.".jpg";
-				    move_uploaded_file($_FILES["url"]["tmp_name"], $ruta_final);
 				    $con->close();
                     echo "Combo creado con exito!!";
                 }

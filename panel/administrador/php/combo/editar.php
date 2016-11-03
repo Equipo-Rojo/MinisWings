@@ -1,5 +1,6 @@
 <?php
     $id=$_POST['id'];
+    setcookie ("combo", $id, 0, '/');
     include('../conexion.php');
     $con = new Conexion('datosServer.php');
     $con = $con->conectar();
@@ -10,29 +11,29 @@
 ?>
 <style type="text/css">.thumb-image{float:right;width:100px;position:relative;padding:none;}</style>
 <h1>Editar combo</h1>
-<div id="Agregar-Combo"><form id="Agregar-Combo-Fom" class="pure-form pure-form-stacked">
+<div id="Agregar-Combo"><form id="Editar-Combo-Fom" class="pure-form pure-form-stacked">
     <fieldset>
-        <legend>Nuevo combo</legend>
+        <legend><?php echo $producto['nombre']; ?></legend>
 
         <div id="wrapper" style="margin-top: 20px;">
-            <input id="fileUpload" class="form-add-platillo button-secondary pure-button" name="url" multiple="multiple" type="file"/> 
-            <div id="image-holder"></div>
+            <input id="fileUpload" class="button-secondary pure-button" name="url" multiple="multiple" type="file"/> 
+            <div id="image-holder"><img class="thumb-image" src="<?php echo '../../'.$producto['Url'];?>"></div>
         </div> 
 
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Nombre del combo</label>
-                <input id="nom" class="pure-u-1-2 form-add-combo" type="text" name="nombre" value="" required>
+                <input id="nom" class="pure-u-1-2 form-edite-combo" type="text" name="nombre" value="<?php echo $producto['nombre'];?>" required>
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Precio</label>
-                <input id="pre" class="pure-u-1-2 form-add-combo" type="number" name="precio" value="" min="1" required >
+                <input id="pre" class="pure-u-1-2 form-edite-combo" type="number" name="precio" value="<?php echo $producto['precio'];?>" min="1" required >
             </div>
 
             <div class="pure-u-1 pure-u-md-1-3">
                 <label for="">Descripción</label>
-                <textarea id="des" class="pure-u-1-2 form-add-combo" type="text" name="descripcion" value="" required ></textarea>
+                <textarea id="des" class="pure-u-1-2 form-edite-combo" type="text" name="descripcion" value="" required ><?php echo $producto['descripcion'];?></textarea>
             </div>
 
         </div>
@@ -41,7 +42,7 @@
             <?php
                 include('../combo.php');
                 $ing = new combo();
-                $ing -> listarPlatillo(1);
+                $ing -> cargarPlatillo($id);
             ?>
         </div>
         <button id="agregar" type="button" class="pure-button "><i class="fa fa-plus" aria-hidden="true"></i> Agregar Platillo</button>
@@ -52,7 +53,8 @@
 </form>
 <script>
     $(document).ready(function() {
-        var ing = 1;
+        var ing =$.cookie('contador');
+        ing--;
         $("#fileUpload").on('change', function() {
           //Get count of selected files
           var countFiles = $(this)[0].files.length;
@@ -106,7 +108,8 @@
                 success: function(data) {
                     $("#combo").append(data);
                 }  
-            });  
+            }); 
+
         });  
         //---------- Boton de borrar Platillo
         $('#borrar').click(function(event){
@@ -120,7 +123,7 @@
 
             var valido=1;
 
-            $( ".form-add-combo" ).each(function(){
+            $( ".form-edite-combo" ).each(function(){
                 if($(this).val()=="" ||  $(this).val()=="Seleccionar..."){valido=0;}
             });
             $( ".form-id-Platillo" ).each(function(){
@@ -131,14 +134,14 @@
             });
 
             if(valido==1){
-                var form = $('div#Agregar-Combo').find('form#Agregar-Combo-Fom')[0];
+                var form = $('div#Agregar-Combo').find('form#Editar-Combo-Fom')[0];
                 var formulario = new FormData(form);
 
                 $.cookie('contador', ing, {path: '/'});
 
                 $.ajax({
                     data: formulario, // Esto se enviará al php
-                    url: 'php/combo/funcionAgregar.php',
+                    url: 'php/combo/funcionEditar.php',
                     type: 'POST',   
                     async: false,     
                     cache: false,
@@ -150,8 +153,9 @@
                             type: "POST", 
                             url: 'modulos/menu/combo.php',  
                             success: function(data) {
-                                $("div#main").empty();
-                                $("div#main").append(data);
+                                //$("div#main").empty();
+                                //$("div#main").append(data);
+                                location.reload();
                             }  
                         });  
                     }
@@ -160,6 +164,7 @@
             else{
                 alertify.alert("Faltan campos");
             }
+            
         }); 
     });     
 </script>
