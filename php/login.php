@@ -61,6 +61,9 @@ class Login
                         case 'Mesero':
                             header('Location: panel/mesero');
                             break;
+                        case 'Inventario':
+                            header('Location: panel/inventario/');
+                            break;
                     }
                 }   
             }
