@@ -2,7 +2,7 @@
     date_default_timezone_set('America/mexico_city'); 
     $hora_real=date("H:i:s");
 
-    $hrs = "16";
+    $hrs = "14";
     $min = "00";
     $hora_base = date("H:i:s",mktime($hrs,$min,0));
 
