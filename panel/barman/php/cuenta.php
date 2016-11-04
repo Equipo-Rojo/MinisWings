@@ -378,7 +378,7 @@ class orden
                     if($row1['estado']!="Cancelado"){
                          $total+=($row1['cantidad']*$row2['precio']);
                     }
-                    if($row1['estado']!="Servido" && $row1['estado']!="Cancelado"){
+                    if($row1['estado']!="Completo" && $row1['estado']!="Cancelado"){
                         $pagar=0;
                     }
                 }
@@ -425,7 +425,7 @@ class orden
                 if ($result2->num_rows > 0) {
                     $row2 = $result2->fetch_assoc();
                     $total+=($row1['cantidad']*$row2['precio']);
-                    if($row1['estado']!="Servido" && $row1['estado']!="Cancelado"){
+                    if($row1['estado']!="Completo" && $row1['estado']!="Cancelado"){
                         $pagar=0;
                     }
                 }
