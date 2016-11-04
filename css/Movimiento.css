@@ -1,7 +1,7 @@
 
 body{
-	background-color: black;
-	color: white;
+	background-color: #0D0106;
+color: blacK;
 }
 h1 ,h2, h3, h4{
 	color: white;
@@ -14,15 +14,27 @@ h1 ,h2, h3, h4{
 
 
 }
+input{
+	color: blacK;
+}
 
 #menu{
 	background-color:#1E2019;
-	color:#D3D0CB;
-}
-#menu .pure-menu li a:hover, #menu .pure-menu li a:focus{
-	color:#EFCB3A;
-	background-color: : yellow;
+	color:#FFF8F0;
 
+}
+#menu .pure-menu li a{
+	color:#FFF8F0;
+
+}
+#menu .pure-menu li a:hover{
+	background-color: #FFF8F0;
+	color: #1E2019;
+
+}
+ #menu .pure-menu li a:focus{
+ 	background-color: #0D0106;
+ 	color: #EFCB3A;
 }
 
 thead th{
@@ -36,7 +48,9 @@ background-color: #D3D0CB;
 color: black;
 }
 
-
+legend{
+	color: white;
+}
 
 .fa-trash{
 	color: #931621;
@@ -57,4 +71,8 @@ font-size: 3em;
  *{
  	font-size: 1.03em;
  }
+
+
+
+
 }

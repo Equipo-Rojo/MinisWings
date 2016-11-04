@@ -41,7 +41,7 @@ class orden
                 $cuenta.= '
                 <fieldset>
                     <legend> '.$row['NumMesa'].'</legend>
-                    <button id="'.$row['id_Cue'].'" class="add-orden button-xlarge button-warning pure-button"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Orden</button>
+                    <button id="'.$row['id_Cue'].'" class="add-orden button-xlarge button-success pure-button"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Orden</button>
                     <button id="'.$row['id_Cue'].'" class="edite-cuenta pure-button button-secondary"><i class="fa ffa-pencil" aria-hidden="true"></i> Editar cuenta</button>
                     <button id="'.$row['id_Cue'].'" class="pay-cuenta pure-button button-error"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Pagar cuenta</button>
                     <br/><br/>

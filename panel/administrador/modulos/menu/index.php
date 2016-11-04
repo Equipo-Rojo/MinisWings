@@ -27,11 +27,11 @@
             </li>
             
             <li class="pure-menu-item menu-item-divided">
-                <a href="promo" class="pure-menu-link"> Promociones</a>
+                <a href="promo" class="pure-menu-link"> <i class="fa fa-calendar" aria-hideen="true"></i> Promociones</a>
             </li>
 
             <li class="pure-menu-item">
-                <a href="combo" class="pure-menu-link"> Combos</a>
+                <a href="combo" class="pure-menu-link"><i class="fa fa-plus" aria-hidden="true"></i>  Combos</a>
             </li>
 
             <li class="pure-menu-item ">
@@ -39,7 +39,7 @@
             </li>
 
             <li class="pure-menu-item">
-                <a href="inventario" class="pure-menu-link"><i class="fa fa-cubes fa-lg" aria-hidden="true"></i> Inventario</a>
+                <a href="inventario" class="pure-menu-link"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i> Inventario</a>
             </li>
 
             <li class="pure-menu-item menu-item-divided">

@@ -1,6 +1,6 @@
 <div class="orden1">
     <h1>Ordenes</h1>
-    <button class="button-xlarge button-warning pure-button add-cuenta"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Cuenta/Mesa</button>
+    <button class="button-xlarge  pure-button add-cuenta"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Cuenta/Mesa</button>
     <br/><br/>
     <div id="panel-cuentas">
          <?php
