@@ -10,7 +10,11 @@
             <li class="pure-menu-item">
                 <a href="orden" class="pure-menu-link"><i class="fa fa-list fa-lg" aria-hidden="true"></i> Órdenes</a>
             </li>
-        
+        	
+        	<li class="pure-menu-item">
+                <a href="cuentas" class="pure-menu-link"><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i> Cuentas</a>
+            </li>
+            
             <li class="pure-menu-item menu-item-divided">
                 <a href="config" class="pure-menu-link"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i> Configuración</a>
             </li>

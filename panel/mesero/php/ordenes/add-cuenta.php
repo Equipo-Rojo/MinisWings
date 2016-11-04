@@ -46,12 +46,13 @@
      $('#guardar').click(function(event){
      	event.preventDefault();
      	var mesa=$('#mesa').val();
-     	var status=$('#status').val();
+
         $.ajax({ 
-        	data:{mesa:mesa, status:status},
+        	data:{mesa:mesa},
             type: "POST", 
             url: 'php/ordenes/funcionNuevaCuenta.php',  
             success: function(data) {  
+                alertify.alert(data);
                 $.ajax({ 
 		            type: "POST", 
 		            url: 'modulos/menu/orden.php',  

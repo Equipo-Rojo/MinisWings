@@ -105,11 +105,15 @@ class cuentaMesa
         if($pagar>0){
             $sql = "UPDATE cuentas SET Total=".$total.", Estatus='Cortesia' WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
+
             $sql="SELECT * FROM cuentas WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
             $result=$result->fetch_assoc();
-            $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$result['NumMesa'];
+           
+            $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa='".$result['NumMesa']."'";
+            
             $result = $this->con->query($sql);
+
             $fecha=date("Y-m-d H:i:s");    
             $sql = $sql = "UPDATE venta SET Estado='Cortesia', Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
@@ -161,7 +165,7 @@ class cuentaMesa
             $sql="SELECT * FROM cuentas WHERE id_Cue=".$id_Cue;
             $result = $this->con->query($sql);
             $result=$result->fetch_assoc();
-            $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa=".$result['NumMesa'];
+            $sql = $sql = "UPDATE mesa SET Estatus='Libre' WHERE NumMesa='".$result['NumMesa']."'";
             $result = $this->con->query($sql);
             $fecha=date("Y-m-d H:i:s");    
             $sql = $sql = "UPDATE venta SET Estado='Pagada', Total_Cierre=".$total.", Fecha_Cierre='".$fecha."' WHERE id_Cue=".$id_Cue;
