@@ -102,7 +102,7 @@ class orden
                                     <td>'.$row2['nombre'].'</td>
                                     <td>'.$row1['comentarios'].'</td>
                                     <th></th>
-                                    <th><i id="'.$row1['id_Ord'].'" class="fa fa-hand-pointer-o change-preparar" aria-hidden="true"></i></th>
+                                    <th><i id="'.$row1['id_Ord'].'" class="fa fa-hand-pointer-o change-listo" aria-hidden="true"></i></th>
                                 </tr>';
                             }
 
@@ -122,7 +122,7 @@ class orden
     public function ordenTerminada($id_Ord)
     {
         $this->conectar();
-        $sql = "UPDATE orden SET estado='Listo' Where id_Ord=".$id_Ord;
+        $sql = "UPDATE orden SET estado='Completo' Where id_Ord=".$id_Ord;
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
             echo "Orden #".$id_Ord." Terminada";
@@ -136,7 +136,7 @@ class orden
         $sql = "UPDATE orden SET estado='Preparando' Where id_Ord=".$id_Ord;
         $result = $this->con->query($sql);
         if($this->con->affected_rows){
-            echo "Orden #".$id_Ord." Terminada";
+            echo "Preparando orden #".$id_Ord;
         } 
         $this->con->close();
     }

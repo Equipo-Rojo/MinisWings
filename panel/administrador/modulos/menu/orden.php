@@ -38,12 +38,12 @@
         });  
     });
     //---------- Boton de pagar cuenta
-    $('.pay-cuenta').click(function(event){
+    $('.pedir-cuenta').click(function(event){
         var id_cue=$(this).attr('id');
         $.ajax({ 
             data:{id_Cue:id_cue}, 
             type: "POST", 
-            url: 'php/ordenes/pay-cuenta.php',  
+            url: 'php/ordenes/pedir-cuenta.php',  
             success: function(data) {  
                 $("div#main").empty();
                 $("div#main").append(data);

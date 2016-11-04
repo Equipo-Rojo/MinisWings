@@ -21,6 +21,10 @@
             <li class="pure-menu-item menu-item-divided">
                 <a href="orden" class="pure-menu-link"><i class="fa fa-list fa-lg" aria-hidden="true"></i> Órdenes</a>
             </li>
+
+            <li class="pure-menu-item">
+                <a href="cuentas" class="pure-menu-link"><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i> Cuentas</a>
+            </li>
           
             <li class="pure-menu-item">
                 <a href="venta" class="pure-menu-link"><i class="fa fa-usd fa-lg" aria-hidden="true"></i> Ventas</a>
