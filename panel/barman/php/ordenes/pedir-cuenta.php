@@ -19,8 +19,7 @@ include('../conexion.php');
                 $orden -> detalleCuenta($id_Cue);
             ?> 
             <br/>
-        <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-usd" aria-hidden="true"></i> Pagar Cuenta</button>
-        <button id="cortesia" type="submit" class="pure-button button-primary"><i class="fa fa-usd" aria-hidden="true"></i> Cortesia</button>
+        <button id="guardar" type="submit" class="pure-button button-warning"><i class="fa fa-usd" aria-hidden="true"></i> Pedir Cuenta</button>
         <button id="cancelar" type="reset" class="pure-button button-error"><i class="fa fa fa-ban" aria-hidden="true"></i> Cancelar</button>
     </fieldset>
 </form>
@@ -46,7 +45,7 @@ include('../conexion.php');
         $.ajax({ 
             data:{id_Cue:id_Cue, mesa:mesa},
             type: "POST", 
-            url: 'php/ordenes/funcionPagar.php',  
+            url: 'php/ordenes/funcionPedir.php',  
             success: function(data) { 
              	alertify.alert(data);  
                 $.ajax({

@@ -3,6 +3,6 @@
 	$mesa=$_POST['mesa'];
 	include('../cuenta.php');
 	$inv=new orden();
-	$inv->PagarCuenta($id_Cue,$mesa); 
+	$inv->pedirCuenta($id_Cue,$mesa); 
 ?>
 
