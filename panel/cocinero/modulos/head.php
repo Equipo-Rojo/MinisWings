@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Proyecto de web-Admin">
 
-	<title>Minni's Wings</title>
+	<title>Mini's Wings</title>
 	<link rel="shortcut icon" href="../../img/logo_icon.ico" type="image/ico">
 	<link rel="stylesheet" href="../../css/pure-min.css">
 	<link rel="stylesheet" href="../../css/font-awesome.min.css">

@@ -3,7 +3,7 @@
 </a>
 <div id="menu">
     <div class="pure-menu">
-        <a class="pure-menu-heading" href="">Minni´s Wings</a>
+        <a class="pure-menu-heading" href="">Mini´s Wings</a>
         <legend>Barman</legend>
         <ul class="pure-menu-list">
 
@@ -20,7 +20,7 @@
             </li>
           
             <li class="pure-menu-item menu-item-divided">
-                <a href="config" class="pure-menu-link"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i> Configuación</a>
+                <a href="config" class="pure-menu-link"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i> Configuración</a>
             </li>
           
             <li class="pure-menu-item">

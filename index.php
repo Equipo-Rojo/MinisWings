@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Minni's Wings</title>
+        <title>Mini's Wings</title>
         <link rel="shortcut icon" href="img/logo_icon.ico" type="image/ico">
         <link rel="stylesheet" href="css/pure-min.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -25,7 +25,7 @@
     </head>
     <body>
         <div id="main" class="content">
-        <h1>Minni's Wings</h1> 
+        <h1>Mini's Wings</h1> 
           <form class="form" method="POST" >
             <input type="text" id="nick" name="nick" placeholder="Ingresa tu usuario" required />
             <input type="password" id="pass" name="pass"  placeholder="Ingresa tu contraseña" required />

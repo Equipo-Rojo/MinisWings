@@ -10,7 +10,7 @@
 <div class="hero">
     <div class="hero-titles">
         <img class="" src="../../img/logo_blanco.png" alt="Pure">
-        <h1 class="hero-tagline">Minni's Wings</h1>
+        <h1 class="hero-tagline">Mini's Wings</h1>
     </div>
 
     <div class="hero-cta">
