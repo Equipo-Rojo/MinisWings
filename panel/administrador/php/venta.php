@@ -192,7 +192,7 @@ class venta
             $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
         }
         $this->conectar();
-    
+        $cerrar=1;
         $sql = "SELECT * FROM venta WHERE Fecha_Apertura>'".$dia."'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
@@ -202,14 +202,20 @@ class venta
                     $this->cortesias+=$row['Total_Cierre'];
                 }
                 $this->total=$this->subtotal-$this->cortesias;
+                if($row['Fecha_Cierre']==NULL){$cerrar=0;}
             }
         }
-        //----------------Registrar totales de venta del dia ---------------
-        $sql = "INSERT INTO corte (Subtotal, Cortesias, Total) VALUES (".$this->subtotal.",".$this->cortesias.",".$this->total.")";
+        if($cerrar>0){
+            //----------------Registrar totales de venta del dia ---------------
+            $sql = "INSERT INTO corte (Subtotal, Cortesias, Total) VALUES (".$this->subtotal.",".$this->cortesias.",".$this->total.")";
 
-        $result = $this->con->query($sql);
-        if($this->con->affected_rows){
-            echo "php/venta/reporte.php";
+            $result = $this->con->query($sql);
+            if($this->con->affected_rows){
+                echo "Se registró corte";
+            }
+        }
+        else{
+            echo "Cuentas pendientes, cerrar antes de realizar corte";
         }
         $this->con->close();
     }

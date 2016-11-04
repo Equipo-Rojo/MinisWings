@@ -84,7 +84,7 @@
             type: "POST", 
             url: 'php/venta/corte.php',  
             success: function(data) {
-                alertify.alert("Se registró el corte");
+                alertify.alert(data);
                 $.ajax({ 
                     type: "POST", 
                     url: 'php/venta/reporte.php',  
