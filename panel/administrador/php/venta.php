@@ -207,7 +207,7 @@ class venta
         }
         if($cerrar>0){
             //----------------Registrar totales de venta del dia ---------------
-            $sql = "INSERT INTO corte (Subtotal, Cortesias, Total) VALUES (".$this->subtotal.",".$this->cortesias.",".$this->total.")";
+            $sql = "UPDATE corte SET Subtotal='".$this->subtotal."', Cortesias='".$this->cortesias."', Total='".$this->total."' WHERE Fecha>'".$dia."'";
 
             $result = $this->con->query($sql);
             if($this->con->affected_rows){
@@ -216,6 +216,48 @@ class venta
         }
         else{
             echo "Cuentas pendientes, cerrar antes de realizar corte";
+        }
+        $this->con->close();
+    }
+     //--------------- registrar corte de caja
+    public function setFondo($fondo)
+    {
+        //----------------Estimar totales de venta del dia ---------------
+        date_default_timezone_set('America/mexico_city'); 
+        $hora_real=date("H:i:s");
+
+        $hrs = "14";
+        $min = "00";
+        $hora_base = date("H:i:s",mktime($hrs,$min,0));
+
+        if($hora_real>$hora_base){ //si pasa de las 4 pm
+            $hoy = date('Y-m-d');
+            $d=date('d', strtotime($hoy));
+            $m=date('m', strtotime($hoy));
+            $y=date('Y', strtotime($hoy));
+            $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
+        }
+        else{
+            $hoy = date('Y-m-d');
+            $ayer = strtotime ('-1 day' , strtotime($hoy)) ;
+            $ayer = date ('Y-m-d', $ayer);
+            $d=date('d', strtotime($ayer));
+            $m=date('m', strtotime($ayer));
+            $y=date('Y', strtotime($ayer));
+            $dia = date("Y-m-d H:i:s",mktime($hrs,$min,0,$m,$d,$y));
+        }
+        $this->conectar();
+        
+            //----------------Registrar el fondo del dia ---------------
+        $sql = "INSERT INTO corte (Fondo) VALUES (".$fondo.")";
+
+            $result = $this->con->query($sql);
+            if($this->con->affected_rows){
+                echo "Fondo del dia guardado";
+            }
+        
+        else{
+            echo "Error al registrar fondo";
         }
         $this->con->close();
     }
